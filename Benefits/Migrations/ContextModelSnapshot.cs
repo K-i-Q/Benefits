@@ -21,7 +21,7 @@ namespace Benefits.Migrations
 
             modelBuilder.Entity("Benefits.Models.Cliente", b =>
                 {
-                    b.Property<int>("ClienteId")
+                    b.Property<long>("ClienteId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
