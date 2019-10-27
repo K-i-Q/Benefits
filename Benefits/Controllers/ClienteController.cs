@@ -55,6 +55,8 @@ namespace Benefits.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Cliente cliente)
         {
+            //TODO: validar campos
+            //TODO: Não deixar cadastrar clientes iguais
             _clienteDAO.CadastrarCliente(cliente);
             return RedirectToAction("Index");
         }
