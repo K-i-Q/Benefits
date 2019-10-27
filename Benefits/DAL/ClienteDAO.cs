@@ -27,6 +27,12 @@ namespace Benefits.DAL
             _context.SaveChanges();
         }
 
+        public void ExcluirCliente(Cliente cliente)
+        {
+            _context.Clientes.Remove(cliente);
+            _context.SaveChanges();
+        }
+
         public Cliente BuscarClientePorId(long id) => _context.Clientes.Find(id);
 
     }
