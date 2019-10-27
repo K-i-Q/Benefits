@@ -63,7 +63,7 @@ namespace Benefits
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Empresa}/{action=Cadastrar}/{id?}");
+                    template: "{controller=Cliente}/{action=Cadastrar}/{id?}");
             });
         }
     }

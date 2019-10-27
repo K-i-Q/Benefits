@@ -16,9 +16,9 @@ namespace Benefits.Controllers
             _clienteDAO = clienteDAO;
         }
         #region Navigation Views
-        public IActionResult Index()
+        public IActionResult Index(Cliente cliente)
         {
-            return View();
+            return View(cliente);
         }
         public IActionResult Perfil()
         {
@@ -45,10 +45,6 @@ namespace Benefits.Controllers
         {
             return View(_clienteDAO.BuscarClientePorId(id));
         }
-        public IActionResult Detalhes(long id)
-        {
-            return View(_clienteDAO.BuscarClientePorId(id));
-        }
         public IActionResult Excluir(long id)
         {
             return View(_clienteDAO.BuscarClientePorId(id));
@@ -62,18 +58,12 @@ namespace Benefits.Controllers
             //TODO: validar campos
             //TODO: Não deixar cadastrar clientes iguais
             _clienteDAO.CadastrarCliente(cliente);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", cliente);
         }
         [HttpPost]
         public IActionResult Editar(Cliente cliente)
         {
             _clienteDAO.EditarCliente(cliente);
-            return RedirectToAction("Index");
-        }
-        [HttpPost]
-        public IActionResult Detalhes(Cliente cliente)
-        {
-            _clienteDAO.BuscarClientePorId(cliente.ClienteId);
             return RedirectToAction("Index");
         }
         [HttpPost]
