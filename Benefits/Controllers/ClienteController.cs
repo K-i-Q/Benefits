@@ -45,6 +45,10 @@ namespace Benefits.Controllers
         {
             return View(_clienteDAO.BuscarClientePorId(id));
         }
+        public IActionResult Detalhes(long id)
+        {
+            return View(_clienteDAO.BuscarClientePorId(id));
+        }
         #endregion
 
         #region Crud Actions
@@ -58,6 +62,12 @@ namespace Benefits.Controllers
         public IActionResult Editar(Cliente cliente)
         {
             _clienteDAO.EditarCliente(cliente);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult Detalhes(Cliente cliente)
+        {
+            _clienteDAO.BuscarClientePorId(cliente.ClienteId);
             return RedirectToAction("Index");
         }
 
