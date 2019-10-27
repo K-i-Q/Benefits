@@ -11,5 +11,6 @@ namespace Benefits.Models
         public Context(DbContextOptions<Context> options) : base(options) { }
 
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Empresa> Empresas { get; set; }
     }
 }
