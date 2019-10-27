@@ -15,5 +15,11 @@ namespace Benefits.DAL
             _context = context;
         }
 
+        public void CadastrarEmpresa(Empresa empresa)
+        {
+            _context.Empresas.Add(empresa);
+            _context.SaveChanges();
+        }
+
     }
 }
