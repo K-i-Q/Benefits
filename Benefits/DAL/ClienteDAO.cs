@@ -21,5 +21,13 @@ namespace Benefits.DAL
             _context.SaveChanges();
         }
 
+        public void EditarCliente(Cliente cliente)
+        {
+            _context.Clientes.Update(cliente);
+            _context.SaveChanges();
+        }
+
+        public Cliente BuscarClientePorId(long id) => _context.Clientes.Find(id);
+
     }
 }

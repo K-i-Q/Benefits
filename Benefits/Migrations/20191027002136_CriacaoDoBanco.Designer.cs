@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Benefits.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191026233741_CriacaoDoBanco")]
+    [Migration("20191027002136_CriacaoDoBanco")]
     partial class CriacaoDoBanco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace Benefits.Migrations
 
             modelBuilder.Entity("Benefits.Models.Cliente", b =>
                 {
-                    b.Property<int>("ClienteId")
+                    b.Property<long>("ClienteId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
