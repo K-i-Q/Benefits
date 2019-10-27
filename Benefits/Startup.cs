@@ -38,6 +38,7 @@ namespace Benefits
                 Configuration.GetConnectionString("BenefitsConnection")
                 ));
             services.AddScoped<ClienteDAO>();
+            services.AddScoped<EmpresaDAO>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -62,7 +63,7 @@ namespace Benefits
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Login}/{action=LoginCliente}/{id?}");
+                    template: "{controller=Empresa}/{action=Cadastrar}/{id?}");
             });
         }
     }
