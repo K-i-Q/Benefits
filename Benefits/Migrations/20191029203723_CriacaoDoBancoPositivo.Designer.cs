@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Benefits.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191027042753_CriacaoModeloEmpresa")]
-    partial class CriacaoModeloEmpresa
+    [Migration("20191029203723_CriacaoDoBancoPositivo")]
+    partial class CriacaoDoBancoPositivo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

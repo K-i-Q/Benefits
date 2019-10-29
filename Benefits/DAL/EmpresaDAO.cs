@@ -21,5 +21,18 @@ namespace Benefits.DAL
             _context.SaveChanges();
         }
 
+        public void ExcluirEmpresa(Empresa empresa)
+        {
+            _context.Empresas.Remove(empresa);
+            _context.SaveChanges();
+        }
+
+        public void EditarEmpresa(Empresa empresa)
+        {
+            _context.Empresas.Update(empresa);
+            _context.SaveChanges();
+        }
+
+        public Empresa BuscarEmpresaPorId(long id) => _context.Empresas.Find(id);
     }
 }

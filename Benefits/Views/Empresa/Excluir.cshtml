@@ -1,12 +1,13 @@
 ﻿@model Benefits.Models.Empresa
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Excluir";
     Layout = "~/Views/Shared/_EmpresaLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Excluir</h2>
 
+<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Empresa</h4>
     <hr />
@@ -48,8 +49,10 @@
             @Html.DisplayFor(model => model.CriadaEm)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Editar" asp-controller="Empresa" asp-route-id="@Model.EmpresaId">Editar</a> |
-    <a asp-action="Index">Back to List</a>
+    
+    <form asp-action="Excluir">
+        <input type="hidden" asp-for="EmpresaId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
 </div>

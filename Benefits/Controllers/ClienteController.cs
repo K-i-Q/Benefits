@@ -15,28 +15,11 @@ namespace Benefits.Controllers
         {
             _clienteDAO = clienteDAO;
         }
-        #region Navigation Views
+        #region Navigation Views Crud
         public IActionResult Index(Cliente cliente)
         {
             return View(cliente);
         }
-        public IActionResult Perfil()
-        {
-            return View();
-        }
-        public IActionResult Empresas()
-        {
-            return View();
-        }
-        public IActionResult Parceiros()
-        {
-            return View();
-        }
-        public IActionResult Beneficios()
-        {
-            return View();
-        }
-
         public IActionResult Cadastrar()
         {
             return View();
@@ -48,6 +31,21 @@ namespace Benefits.Controllers
         public IActionResult Excluir(long id)
         {
             return View(_clienteDAO.BuscarClientePorId(id));
+        }
+        #endregion
+
+        #region Navigation Views
+        public IActionResult Empresas()
+        {
+            return View();
+        }
+        public IActionResult Parceiros()
+        {
+            return View();
+        }
+        public IActionResult Beneficios()
+        {
+            return View();
         }
         #endregion
 
@@ -64,13 +62,13 @@ namespace Benefits.Controllers
         public IActionResult Editar(Cliente cliente)
         {
             _clienteDAO.EditarCliente(cliente);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", cliente);
         }
         [HttpPost]
         public IActionResult Excluir(Cliente cliente)
         {
             _clienteDAO.ExcluirCliente(_clienteDAO.BuscarClientePorId(cliente.ClienteId));
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", cliente);
         }
         #endregion
     }
