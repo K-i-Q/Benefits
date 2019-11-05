@@ -1,10 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Benefits.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace Benefits.Models
+namespace Repository
 {
     public class Context : DbContext
     {

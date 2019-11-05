@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Benefits.DAL;
+﻿using Benefits.DAL;
 using Benefits.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +11,7 @@ namespace Benefits.Controllers
         {
             _clienteDAO = clienteDAO;
         }
+
         #region Navigation Views Crud
         public IActionResult Index(Cliente cliente)
         {

@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Benefits.Migrations
+namespace Repository.Migrations
 {
-    public partial class CriacaoDoBancoPositivo : Migration
+    public partial class CriacaoDoBancoDDD : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
