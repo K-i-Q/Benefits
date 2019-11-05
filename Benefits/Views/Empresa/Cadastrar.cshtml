@@ -39,18 +39,11 @@
                 <span asp-validation-for="Telefone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CriadaEm" class="control-label"></label>
-                <input asp-for="CriadaEm" class="form-control" />
-                <span asp-validation-for="CriadaEm" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Cadastrar" class="btn btn-block btn-primary" />
+                <a class="btn btn-block btn-outline-warning" asp-controller="Home" asp-action="Home">Voltar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
