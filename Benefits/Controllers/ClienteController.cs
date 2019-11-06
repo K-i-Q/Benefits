@@ -1,6 +1,8 @@
-﻿using Benefits.DAL;
-using Benefits.Models;
+﻿using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Repository;
+using System.Net;
 
 namespace Benefits.Controllers
 {
@@ -12,6 +14,20 @@ namespace Benefits.Controllers
             _clienteDAO = clienteDAO;
         }
 
+        #region Consumo de API
+        [HttpPost]
+        public IActionResult BuscarCep(Cliente cliente)
+        {
+            string url = "https://viacep.com.br/ws/" + cliente.Endereco.Cep + "/json/";
+            WebClient client = new WebClient();
+            string resultado = client.DownloadString(url);
+            //Endereco endereco = JsonConvert.DeserializeObject<Endereco>(resultado);
+            TempData["Endereco"] = resultado;
+            return RedirectToAction(nameof(Cadastrar));
+        }
+        #endregion
+
+
         #region Navigation Views Crud
         public IActionResult Index(Cliente cliente)
         {
@@ -19,7 +35,14 @@ namespace Benefits.Controllers
         }
         public IActionResult Cadastrar()
         {
-            return View();
+            Cliente cliente = new Cliente();
+            if(TempData["Endereco"] != null)
+            {
+                string resultado = TempData["Endereco"].ToString();
+                Endereco endereco = JsonConvert.DeserializeObject<Endereco>(resultado);
+                cliente.Endereco = endereco;
+            }
+            return View(cliente);
         }
         public IActionResult Editar(long id)
         {

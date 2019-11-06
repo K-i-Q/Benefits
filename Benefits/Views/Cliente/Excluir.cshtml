@@ -1,4 +1,4 @@
-﻿@model Benefits.Models.Cliente
+﻿@model Domain.Cliente
 
 @{
     ViewData["Title"] = "Excluir";
@@ -43,7 +43,7 @@
             @Html.DisplayFor(model => model.CadastradoEm)
         </dd>
     </dl>
-    
+
     <form asp-action="Excluir">
         <input type="hidden" asp-for="ClienteId" />
         <input type="submit" value="Delete" class="btn btn-default" /> |

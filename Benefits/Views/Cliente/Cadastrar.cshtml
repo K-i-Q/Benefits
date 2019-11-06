@@ -1,46 +1,73 @@
-@model Benefits.Models.Cliente
+@model Domain.Cliente
 
-@{
-    ViewData["Title"] = "Cadastrar";
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";
-}
+<div class="container-fluid">
+    <div class="col-md-12">
+        <h2>Cadastrar</h2>
+        <h4>Cliente</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <fieldset class="float-left m-2">
+                        <legend>Cliente</legend>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Nome" class="control-label"></label>
+                            <input asp-for="Nome" class="form-control" />
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Telefone" class="control-label"></label>
+                            <input asp-for="Telefone" class="form-control" />
+                            <span asp-validation-for="Telefone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Genero" class="control-label"></label>
+                            <input asp-for="Genero" class="form-control" />
+                            <span asp-validation-for="Genero" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Cadastrar" class="btn btn-block btn-primary" />
+                            <a class="btn btn-block btn-outline-warning" asp-controller="Home" asp-action="Home">Voltar</a>
+                        </div>
+                    </fieldset>
+                    <fieldset class="float-left m-2">
+                        <legend>Endereço</legend>
+                        <div class="form-group">
+                            <label asp-for="Endereco.Cep"></label>
+                            <div class="input-group">
+                                <input type="text" asp-for="Endereco.Cep" class="form-control" />
+                                <div class="input-group-append">
+                                    <input type="submit" value="Buscar CEP" class="btn btn-danger" asp-action="BuscarCep" asp-controller="Cliente" />
+                                </div>
+                            </div>
+                        </div>
 
-<h2>Cadastrar</h2>
+                        <div class="form-group">
+                            <label asp-for="Endereco.Logradouro"></label>
+                            <input type="text" asp-for="Endereco.Logradouro" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Endereco.Bairro"></label>
+                            <input type="text" asp-for="Endereco.Bairro" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Endereco.Localidade"></label>
+                            <input type="text" asp-for="Endereco.Localidade" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Endereco.Uf"></label>
+                            <input type="text" asp-for="Endereco.Uf" readonly class="form-control" />
+                        </div>
+                    </fieldset>
 
-<h4>Cliente</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Cadastrar">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone" class="control-label"></label>
-                <input asp-for="Telefone" class="form-control" />
-                <span asp-validation-for="Telefone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Genero" class="control-label"></label>
-                <input asp-for="Genero" class="form-control" />
-                <span asp-validation-for="Genero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Cadastrar" class="btn btn-block btn-primary" />
-                <a class="btn btn-block btn-outline-warning" asp-controller="Home" asp-action="Home">Voltar</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-</div>
-

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Benefits.DAL;
-using Benefits.Models;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,13 +24,19 @@ namespace Benefits
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;//precisa ser falso para que não solicite cookie check
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddDbContext<Context>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("BenefitsConnection")
                 ));
+
+            //Config sessão deve ser antes da injeção de dependência do MVC
+            services.AddSession();//habilita sessão
+            services.AddDistributedMemoryCache(); //melhora desempenho(distribui mémória);
+
+
             services.AddScoped<ClienteDAO>();
             services.AddScoped<EmpresaDAO>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -59,6 +58,8 @@ namespace Benefits
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();//minha aplicação usa sessão
+
 
             app.UseMvc(routes =>
             {

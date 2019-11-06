@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Benefits.DAL;
-using Benefits.Models;
+﻿using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 
 namespace Benefits.Controllers
 {

@@ -1,4 +1,4 @@
-﻿@model Benefits.Models.Empresa
+﻿@model Domain.Empresa
 
 @{
     ViewData["Title"] = "Excluir";
@@ -49,7 +49,7 @@
             @Html.DisplayFor(model => model.CriadaEm)
         </dd>
     </dl>
-    
+
     <form asp-action="Excluir">
         <input type="hidden" asp-for="EmpresaId" />
         <input type="submit" value="Delete" class="btn btn-default" /> |

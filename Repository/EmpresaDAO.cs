@@ -1,7 +1,7 @@
-﻿using Benefits.Models;
+﻿using Domain;
 using Repository;
 
-namespace Benefits.DAL
+namespace Repository
 {
     public class EmpresaDAO
     {

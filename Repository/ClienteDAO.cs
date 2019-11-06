@@ -1,8 +1,8 @@
-﻿using Benefits.Models;
+﻿using Domain;
 using Repository;
 using System.Collections.Generic;
 
-namespace Benefits.DAL
+namespace Repository
 {
     public class ClienteDAO
     {

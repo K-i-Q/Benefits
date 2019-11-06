@@ -1,4 +1,4 @@
-﻿using Benefits.Models;
+﻿using Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Repository
