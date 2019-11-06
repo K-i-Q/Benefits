@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,6 +18,7 @@ namespace Benefits.Models
         public string Email { get; set; }
         public string Telefone { get; set; }
         public string Genero { get; set; }
+        public Endereco Endereco { get; set; }
         public DateTime CadastradoEm { get; set; }
 
         public Cliente()

@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191105234722_CriacaoDoBancoDDD")]
-    partial class CriacaoDoBancoDDD
+    [Migration("20191105235729_AddClassEndereco")]
+    partial class AddClassEndereco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,8 @@ namespace Repository.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<long?>("EnderecoId");
+
                     b.Property<string>("Genero");
 
                     b.Property<string>("Nome");
@@ -38,6 +40,8 @@ namespace Repository.Migrations
                     b.Property<string>("Telefone");
 
                     b.HasKey("ClienteId");
+
+                    b.HasIndex("EnderecoId");
 
                     b.ToTable("Clientes");
                 });
@@ -54,6 +58,8 @@ namespace Repository.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<long?>("EnderecoId");
+
                     b.Property<string>("Razao");
 
                     b.Property<string>("Senha");
@@ -62,7 +68,46 @@ namespace Repository.Migrations
 
                     b.HasKey("EmpresaId");
 
+                    b.HasIndex("EnderecoId");
+
                     b.ToTable("Empresas");
+                });
+
+            modelBuilder.Entity("Domain.Endereco", b =>
+                {
+                    b.Property<long>("EnderecoId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Bairro");
+
+                    b.Property<string>("Cep");
+
+                    b.Property<DateTime>("CriadoEm");
+
+                    b.Property<string>("Localidade");
+
+                    b.Property<string>("Logradouro");
+
+                    b.Property<string>("Uf");
+
+                    b.HasKey("EnderecoId");
+
+                    b.ToTable("Enderecos");
+                });
+
+            modelBuilder.Entity("Benefits.Models.Cliente", b =>
+                {
+                    b.HasOne("Domain.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId");
+                });
+
+            modelBuilder.Entity("Benefits.Models.Empresa", b =>
+                {
+                    b.HasOne("Domain.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId");
                 });
 #pragma warning restore 612, 618
         }
