@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Repository;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
@@ -13,10 +14,32 @@ namespace Repository
             _context = context;
         }
 
-        public void CadastrarCliente(Cliente cliente)
+        public bool ValidaCliente(Cliente cliente)
         {
-            _context.Clientes.Add(cliente);
-            _context.SaveChanges();
+            if ((_context.Clientes.FirstOrDefault(x => x.Email.Equals(cliente.Email))) ==null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public bool CadastrarCliente(Cliente cliente)
+        {
+            if (ValidaCliente(cliente))
+            {
+                _context.Clientes.Add(cliente);
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            
         }
 
         public void EditarCliente(Cliente cliente)
