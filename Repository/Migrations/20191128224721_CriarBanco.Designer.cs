@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191105235729_AddClassEndereco")]
-    partial class AddClassEndereco
+    [Migration("20191128224721_CriarBanco")]
+    partial class CriarBanco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Benefits.Models.Cliente", b =>
+            modelBuilder.Entity("Domain.Cliente", b =>
                 {
                     b.Property<long>("ClienteId")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace Repository.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("Benefits.Models.Empresa", b =>
+            modelBuilder.Entity("Domain.Empresa", b =>
                 {
                     b.Property<long>("EmpresaId")
                         .ValueGeneratedOnAdd()
@@ -96,14 +96,14 @@ namespace Repository.Migrations
                     b.ToTable("Enderecos");
                 });
 
-            modelBuilder.Entity("Benefits.Models.Cliente", b =>
+            modelBuilder.Entity("Domain.Cliente", b =>
                 {
                     b.HasOne("Domain.Endereco", "Endereco")
                         .WithMany()
                         .HasForeignKey("EnderecoId");
                 });
 
-            modelBuilder.Entity("Benefits.Models.Empresa", b =>
+            modelBuilder.Entity("Domain.Empresa", b =>
                 {
                     b.HasOne("Domain.Endereco", "Endereco")
                         .WithMany()
