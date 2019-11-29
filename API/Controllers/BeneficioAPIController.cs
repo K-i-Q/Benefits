@@ -47,9 +47,9 @@ namespace API.Controllers
         [Route("BuscaPorEmpresa/{id}")]
         public IActionResult BuscarPorCategoria([FromRoute] int id)
         {
-            List<Beneficio> beneficio =
-                _beneficioDAO.ListarPorCategoria(id);
-            if (beneficio.Count > 0)
+            Beneficio beneficio =
+                _beneficioDAO.ListarBeneficioPorEmpresa(id);
+            if (beneficio != null)
             {
                 return Ok(beneficio);
             }

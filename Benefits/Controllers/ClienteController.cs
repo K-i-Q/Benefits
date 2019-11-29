@@ -44,13 +44,13 @@ namespace Benefits.Controllers
             }
             return View(cliente);
         }
-        public IActionResult Editar(long id)
+        public IActionResult Editar(int id)
         {
-            return View(_clienteDAO.BuscarClientePorId(id));
+            return View(_clienteDAO.BuscarPorId(id));
         }
-        public IActionResult Excluir(long id)
+        public IActionResult Excluir(int id)
         {
-            return View(_clienteDAO.BuscarClientePorId(id));
+            return View(_clienteDAO.BuscarPorId(id));
         }
         #endregion
 

@@ -11,9 +11,7 @@ namespace Domain
     {
         [Key]
         public int EmpresaEmpresaId { get; set; }
-        public int EmpresaUmId { get; set; }
         public Empresa EmpresaUm { get; set; }
-        public int EmpresaDoisId { get; set; }
         public Empresa EmpresaDois { get; set; }
         public DateTime CriadoEm { get; set; }
 

@@ -73,5 +73,18 @@ namespace Repository
                 throw ex;
             }
         }
+
+        public Beneficio ListarBeneficioPorEmpresa(int? id)
+        {
+            try
+            {
+                return _context.Beneficios.FirstOrDefault(x => x.Empresa.EmpresaId == id);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
