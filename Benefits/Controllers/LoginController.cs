@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Benefits.Controllers
 {
@@ -7,10 +8,16 @@ namespace Benefits.Controllers
         //TODO: Autenticação do cliente
         //TODO: Autenticação da empresa
 
-        public IActionResult LoginCliente()
+        public async Task<IActionResult> LoginCliente()
         {
             return View();
         }
+
+
+
+
+
+        //---------------------------------------------------------------------------------
 
         public IActionResult LoginEmpresa()
         {
