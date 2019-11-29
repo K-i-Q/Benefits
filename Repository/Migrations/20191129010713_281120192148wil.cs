@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class _281120192148ww : Migration
+    public partial class _281120192148wil : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
