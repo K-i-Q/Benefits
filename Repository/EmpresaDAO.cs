@@ -1,9 +1,12 @@
-﻿using Domain;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Domain;
 using Repository;
 
 namespace Repository
 {
-    public class EmpresaDAO
+    public class EmpresaDAO : IRepository<Empresa>
     {
         private readonly Context _context;
 
@@ -12,24 +15,63 @@ namespace Repository
             _context = context;
         }
 
-        public void CadastrarEmpresa(Empresa empresa)
+        public bool Cadastrar(Empresa empresa)
         {
-            _context.Empresas.Add(empresa);
-            _context.SaveChanges();
+            try
+            {
+                _context.Empresas.Add(empresa);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public void ExcluirEmpresa(Empresa empresa)
+        public List<Empresa> ListarTodos()
         {
-            _context.Empresas.Remove(empresa);
-            _context.SaveChanges();
+            return _context.Empresas.ToList();
         }
 
-        public void EditarEmpresa(Empresa empresa)
+        public Empresa BuscarPorId(int? id)
         {
-            _context.Empresas.Update(empresa);
-            _context.SaveChanges();
+            try
+            {
+                return _context.Empresas.Find(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Empresa BuscarEmpresaPorId(long id) => _context.Empresas.Find(id);
+        public bool Remover(Empresa empresa)
+        {
+            try
+            {
+                _context.Empresas.Remove(empresa);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool Editar(Empresa empresa)
+        {
+            try
+            {
+                _context.Empresas.Update(empresa);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

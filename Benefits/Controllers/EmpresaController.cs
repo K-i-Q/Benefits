@@ -21,13 +21,13 @@ namespace Benefits.Controllers
         {
             return View();
         }
-        public IActionResult Editar(long id)
+        public IActionResult Editar(int id)
         {
-            return View(_empresaDAO.BuscarEmpresaPorId(id));
+            return View(_empresaDAO.BuscarPorId(id));
         }
-        public IActionResult Excluir(long id)
+        public IActionResult Excluir(int id)
         {
-            return View(_empresaDAO.BuscarEmpresaPorId(id));
+            return View(_empresaDAO.BuscarPorId(id));
         }
         #endregion
 
@@ -35,20 +35,20 @@ namespace Benefits.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Empresa empresa)
         {
-            _empresaDAO.CadastrarEmpresa(empresa);
+            _empresaDAO.Cadastrar(empresa);
             return RedirectToAction("Index", empresa);
         }
 
         [HttpPost]
         public IActionResult Editar(Empresa empresa)
         {
-            _empresaDAO.EditarEmpresa(empresa);
+            _empresaDAO.Editar(empresa);
             return RedirectToAction("Index", empresa);
         }
         [HttpPost]
         public IActionResult Excluir(Empresa empresa)
         {
-            _empresaDAO.ExcluirEmpresa(_empresaDAO.BuscarEmpresaPorId(empresa.EmpresaId));
+            _empresaDAO.Remover(_empresaDAO.BuscarPorId(empresa.EmpresaId));
             return RedirectToAction("Index", empresa.EmpresaId);
         }
 

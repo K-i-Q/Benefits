@@ -7,7 +7,7 @@ using System.Text;
 namespace Domain
 {
     [Table("ClientesDaEmpresa")]
-    class EmpresaCliente
+    public class EmpresaCliente
     {
         [Key]
         public int EmpresaClienteId { get; set; }
