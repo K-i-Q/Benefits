@@ -18,7 +18,7 @@ namespace Benefits.Controllers
         [HttpPost]
         public IActionResult BuscarCep(Cliente cliente)
         {
-            string url = "https://viacep.com.br/ws/" + cliente.Endereco.Cep + "/json/";
+            string url = "http://apps.widenet.com.br/busca-cep/api/cep/" + cliente.Endereco.Cep + ".json";
             WebClient client = new WebClient();
             string resultado = client.DownloadString(url);
             //Endereco endereco = JsonConvert.DeserializeObject<Endereco>(resultado);
