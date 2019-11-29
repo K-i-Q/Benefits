@@ -9,16 +9,12 @@ namespace Domain
     public class Empresa
     {
         [Key]
-        public long EmpresaId { get; set; }
-        [Display(Name ="CNPJ")]
+        public int EmpresaId { get; set; }
         public string Cnpj { get; set; }
-        [Display(Name = "Razão Social")]
         public string Razao { get; set; }
-        [Display(Name = "E-mail")]
         public string Email { get; set; }
         public string Senha { get; set; }
         public string Telefone { get; set; }
-        [Display(Name = "Endereço")]
         public Endereco Endereco { get; set; }
         public DateTime CriadaEm { get; set; }
 

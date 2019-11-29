@@ -1,11 +1,12 @@
 ﻿using Domain;
 using Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Repository
 {
-    public class ClienteDAO
+    public class ClienteDAO : IRepository<Cliente>
     {
         private readonly Context _context;
 
@@ -14,47 +15,66 @@ namespace Repository
             _context = context;
         }
 
-        public bool ValidaCliente(Cliente cliente)
+        public bool Cadastrar(Cliente cliente)
         {
-            if ((_context.Clientes.FirstOrDefault(x => x.Email.Equals(cliente.Email))) ==null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-        public bool CadastrarCliente(Cliente cliente)
-        {
-            if (ValidaCliente(cliente))
+            try
             {
                 _context.Clientes.Add(cliente);
                 _context.SaveChanges();
                 return true;
             }
-            else
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
-
             
         }
 
-        public void EditarCliente(Cliente cliente)
+        public List<Cliente> ListarTodos()
         {
-            _context.Clientes.Update(cliente);
-            _context.SaveChanges();
+            return _context.Clientes.ToList();
         }
 
-        public void ExcluirCliente(Cliente cliente)
+        public Cliente BuscarPorId(int? id)
         {
-            _context.Clientes.Remove(cliente);
-            _context.SaveChanges();
+            try
+            {
+                return _context.Clientes.Find(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Cliente BuscarClientePorId(long id) => _context.Clientes.Find(id);
+        public bool Remover(Cliente cliente)
+        {
+            try
+            {
+                _context.Clientes.Remove(cliente);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
 
+        public bool Editar(Cliente cliente)
+        {
+            try
+            {
+                _context.Clientes.Update(cliente);
+                _context.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
     }
 }

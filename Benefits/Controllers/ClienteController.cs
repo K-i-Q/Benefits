@@ -74,7 +74,8 @@ namespace Benefits.Controllers
         public IActionResult Cadastrar(Cliente cliente)
         {
             //TODO: validar campos
-            if (_clienteDAO.CadastrarCliente(cliente))
+            //TODO: Não deixar cadastrar clientes iguais
+            if (_clienteDAO.Cadastrar(cliente))
             {
                 return RedirectToAction("Index", cliente);
             }
@@ -83,13 +84,13 @@ namespace Benefits.Controllers
         [HttpPost]
         public IActionResult Editar(Cliente cliente)
         {
-            _clienteDAO.EditarCliente(cliente);
+            _clienteDAO.Editar(cliente);
             return RedirectToAction("Index", cliente);
         }
         [HttpPost]
         public IActionResult Excluir(Cliente cliente)
         {
-            _clienteDAO.ExcluirCliente(_clienteDAO.BuscarClientePorId(cliente.ClienteId));
+            _clienteDAO.Remover(_clienteDAO.BuscarPorId(cliente.ClienteId));
             return RedirectToAction("Index", cliente);
         }
         #endregion

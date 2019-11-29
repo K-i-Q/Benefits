@@ -7,7 +7,7 @@ using System.Text;
 namespace Domain
 {
     [Table("Beneficios")]
-    class Beneficio
+    public class Beneficio
     {
         [Key]
         public int BeneficioId { get; set; }

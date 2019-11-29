@@ -1,25 +1,37 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain;
-using Repository;
+using System.Text;
 
 namespace Repository
 {
-    public class EmpresaDAO : IRepository<Empresa>
+    public class BeneficioDAO : IRepository<Beneficio>
     {
         private readonly Context _context;
 
-        public EmpresaDAO(Context context)
+        public BeneficioDAO(Context context)
         {
             _context = context;
         }
 
-        public bool Cadastrar(Empresa empresa)
+        public Beneficio BuscarPorId(int? id)
         {
             try
             {
-                _context.Empresas.Add(empresa);
+                return _context.Beneficios.Find(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool Cadastrar(Beneficio beneficio)
+        {
+            try
+            {
+                _context.Beneficios.Add(beneficio);
                 _context.SaveChanges();
                 return true;
             }
@@ -29,28 +41,11 @@ namespace Repository
             }
         }
 
-        public List<Empresa> ListarTodos()
-        {
-            return _context.Empresas.ToList();
-        }
-
-        public Empresa BuscarPorId(int? id)
+        public bool Editar(Beneficio beneficio)
         {
             try
             {
-                return _context.Empresas.Find(id);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public bool Remover(Empresa empresa)
-        {
-            try
-            {
-                _context.Empresas.Remove(empresa);
+                _context.Beneficios.Update(beneficio);
                 _context.SaveChanges();
                 return true;
             }
@@ -60,11 +55,16 @@ namespace Repository
             }
         }
 
-        public bool Editar(Empresa empresa)
+        public List<Beneficio> ListarTodos()
+        {
+            return _context.Beneficios.ToList();
+        }
+
+        public bool Remover(Beneficio beneficio)
         {
             try
             {
-                _context.Empresas.Update(empresa);
+                _context.Beneficios.Remove(beneficio);
                 _context.SaveChanges();
                 return true;
             }
