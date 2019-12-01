@@ -14,20 +14,6 @@ namespace Benefits.Controllers
             _clienteDAO = clienteDAO;
         }
 
-        #region Consumo de API
-        [HttpPost]
-        public IActionResult BuscarCep(Cliente cliente)
-        {
-            string url = "http://apps.widenet.com.br/busca-cep/api/cep/" + cliente.Endereco.Cep + ".json";
-            WebClient client = new WebClient();
-            string resultado = client.DownloadString(url);
-            //Endereco endereco = JsonConvert.DeserializeObject<Endereco>(resultado);
-            TempData["Endereco"] = resultado;
-            return RedirectToAction(nameof(Cadastrar));
-        }
-        #endregion
-
-
         #region Navigation Views Crud
         public IActionResult Index(Cliente cliente)
         {
@@ -51,6 +37,17 @@ namespace Benefits.Controllers
         public IActionResult Excluir(int id)
         {
             return View(_clienteDAO.BuscarPorId(id));
+        }
+        #endregion
+
+        #region Consumo de API
+        [HttpPost]
+        public IActionResult BuscarCep(Cliente cliente)
+        {
+            string url = "http://apps.widenet.com.br/busca-cep/api/cep/" + cliente.Endereco.Code + ".json";
+            WebClient client = new WebClient();
+            TempData["Endereco"] = client.DownloadString(url);
+            return RedirectToAction(nameof(Cadastrar));
         }
         #endregion
 

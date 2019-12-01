@@ -10,15 +10,15 @@ namespace Domain
         [Key]
         public long EnderecoId { get; set; }
         [Display(Name = "Rua:")]
-        public string Logradouro { get; set; }
+        public string Address { get; set; }
         [Display(Name = "CEP:")]
-        public string Cep { get; set; }
+        public string Code { get; set; }
         [Display(Name = "Bairro:")]
-        public string Bairro { get; set; }
+        public string District { get; set; }
         [Display(Name = "Cidade:")]
-        public string Localidade { get; set; }
+        public string City { get; set; }
         [Display(Name = "Estado:")]
-        public string Uf { get; set; }
+        public string State { get; set; }
         public DateTime CriadoEm { get; set; }
         public Endereco()
         {

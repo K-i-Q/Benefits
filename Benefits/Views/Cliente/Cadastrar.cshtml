@@ -34,12 +34,13 @@
                             <a class="btn btn-block btn-outline-warning" asp-controller="Home" asp-action="Home">Voltar</a>
                         </div>
                     </fieldset>
-                    <fieldset class="float-left m-2">
-                        <legend>Endereço</legend>
+                    <fieldset class="float-left m-1">
+                        </br>
+                        </br>
                         <div class="form-group">
-                            <label asp-for="Endereco.Cep"></label>
+                            <label asp-for="Endereco.Code"></label>
                             <div class="input-group">
-                                <input type="text" asp-for="Endereco.Cep" class="form-control" />
+                                <input type="text" asp-for="Endereco.Code" class="form-control" />
                                 <div class="input-group-append">
                                     <input type="submit" value="Buscar CEP" class="btn btn-danger" asp-action="BuscarCep" asp-controller="Cliente" />
                                 </div>
@@ -47,20 +48,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="Endereco.Logradouro"></label>
-                            <input type="text" asp-for="Endereco.Logradouro" readonly class="form-control" />
+                            <label asp-for="Endereco.Address"></label>
+                            <input type="text" asp-for="Endereco.Address" class="form-control" readonly="" />
                         </div>
                         <div class="form-group">
-                            <label asp-for="Endereco.Bairro"></label>
-                            <input type="text" asp-for="Endereco.Bairro" readonly class="form-control" />
+                            <label asp-for="Endereco.District"></label>
+                            <input type="text" asp-for="Endereco.District" class="form-control" readonly="" />
                         </div>
                         <div class="form-group">
-                            <label asp-for="Endereco.Localidade"></label>
-                            <input type="text" asp-for="Endereco.Localidade" readonly class="form-control" />
+                            <label asp-for="Endereco.City"></label>
+                            <input type="text" asp-for="Endereco.City" class="form-control" readonly="" />
                         </div>
                         <div class="form-group">
-                            <label asp-for="Endereco.Uf"></label>
-                            <input type="text" asp-for="Endereco.Uf" readonly class="form-control" />
+                            <label asp-for="Endereco.State"></label>
+                            <input type="text" asp-for="Endereco.State" class="form-control" readonly="" />
                         </div>
                     </fieldset>
 
