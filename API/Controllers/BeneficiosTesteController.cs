@@ -8,27 +8,27 @@ using Microsoft.EntityFrameworkCore;
 using Domain;
 using Repository;
 
-namespace API.Controllers
+namespace Benefits.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/teste")]
     [ApiController]
-    public class BeneficioAPIController : ControllerBase
+    public class BeneficiosTesteController : ControllerBase
     {
         private readonly Context _context;
 
-        public BeneficioAPIController(Context context)
+        public BeneficiosTesteController(Context context)
         {
             _context = context;
         }
 
-        // GET: api/BeneficioAPI
+        // GET: api/BeneficiosTeste
         [HttpGet]
         public IEnumerable<Beneficio> GetBeneficios()
         {
-            return _context.Beneficios;
+            return _context.Beneficios.ToList();
         }
 
-        // GET: api/BeneficioAPI/5
+        // GET: api/BeneficiosTeste/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBeneficio([FromRoute] int id)
         {
@@ -47,7 +47,7 @@ namespace API.Controllers
             return Ok(beneficio);
         }
 
-        // PUT: api/BeneficioAPI/5
+        // PUT: api/BeneficiosTeste/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBeneficio([FromRoute] int id, [FromBody] Beneficio beneficio)
         {
@@ -82,7 +82,7 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/BeneficioAPI
+        // POST: api/BeneficiosTeste
         [HttpPost]
         public async Task<IActionResult> PostBeneficio([FromBody] Beneficio beneficio)
         {
@@ -97,7 +97,7 @@ namespace API.Controllers
             return CreatedAtAction("GetBeneficio", new { id = beneficio.BeneficioId }, beneficio);
         }
 
-        // DELETE: api/BeneficioAPI/5
+        // DELETE: api/BeneficiosTeste/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBeneficio([FromRoute] int id)
         {

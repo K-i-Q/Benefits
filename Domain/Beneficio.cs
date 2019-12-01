@@ -19,7 +19,7 @@ namespace Domain
 
         public Beneficio()
         {
-            CriadoEm = DateTime.Now;
+            //CriadoEm = DateTime.Now;
         }
 
 
@@ -47,10 +47,10 @@ namespace Domain
             return sb.ToString();
         }
 
-        public override bool Equals(object obj)
-        {
-            Beneficio b = (Beneficio)obj;
-            return BeneficioId == b.BeneficioId;
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    Beneficio b = (Beneficio)obj;
+        //    return BeneficioId == b.BeneficioId;
+        //}
     }
 }

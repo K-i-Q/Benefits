@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
+using Domain;
 
 namespace Benefits
 {
@@ -28,9 +29,7 @@ namespace Benefits
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<Context>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("BenefitsConnection")
-                ));
+
 
             //Config sessão deve ser antes da injeção de dependência do MVC
             services.AddSession();//habilita sessão
@@ -41,6 +40,11 @@ namespace Benefits
             services.AddScoped<EmpresaDAO>();
             services.AddScoped<BeneficioDAO>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<Context>
+                (options => options.UseSqlServer(
+                Configuration.GetConnectionString
+                ("BenefitsConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
