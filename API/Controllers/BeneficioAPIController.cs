@@ -10,117 +10,49 @@ using Repository;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/beneficio")]
     [ApiController]
     public class BeneficioAPIController : ControllerBase
     {
-        private readonly Context _context;
-
-        public BeneficioAPIController(Context context)
+        private readonly BeneficioDAO _beneficioDAO;
+        public BeneficioAPIController(BeneficioDAO beneficioDAO)
         {
-            _context = context;
+            _beneficioDAO = beneficioDAO;
         }
 
-        // GET: api/BeneficioAPI
+        //GET: /api/Beneficio/ListarTodos
         [HttpGet]
-        public IEnumerable<Beneficio> GetBeneficios()
+        public IActionResult ListarTodos()
         {
-            return _context.Beneficios;
+            return Ok(_beneficioDAO.ListarTodos());
         }
 
-        // GET: api/BeneficioAPI/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBeneficio([FromRoute] int id)
+        //GET: /api/Beneficio/BuscarPorId/2
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult BuscarPorId(int id)
         {
-            if (!ModelState.IsValid)
+            Beneficio p = _beneficioDAO.BuscarPorId(id);
+            if (p != null)
             {
-                return BadRequest(ModelState);
+                return Ok(p);
             }
-
-            var beneficio = await _context.Beneficios.FindAsync(id);
-
-            if (beneficio == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(beneficio);
+            return NotFound(new { msg = "Beneficio não encontrado!" });
         }
 
-        // PUT: api/BeneficioAPI/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBeneficio([FromRoute] int id, [FromBody] Beneficio beneficio)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != beneficio.BeneficioId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(beneficio).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BeneficioExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/BeneficioAPI
-        [HttpPost]
-        public async Task<IActionResult> PostBeneficio([FromBody] Beneficio beneficio)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Beneficios.Add(beneficio);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBeneficio", new { id = beneficio.BeneficioId }, beneficio);
-        }
-
-        // DELETE: api/BeneficioAPI/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBeneficio([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var beneficio = await _context.Beneficios.FindAsync(id);
-            if (beneficio == null)
-            {
-                return NotFound();
-            }
-
-            _context.Beneficios.Remove(beneficio);
-            await _context.SaveChangesAsync();
-
-            return Ok(beneficio);
-        }
-
-        private bool BeneficioExists(int id)
-        {
-            return _context.Beneficios.Any(e => e.BeneficioId == id);
-        }
+        //[HttpPost]
+        //[Route("Cadastrar")]
+        //public IActionResult Cadastrar([FromBody]Beneficio b)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (_beneficioDAO.Cadastrar(b))
+        //        {
+        //            return Created("", b);
+        //        }
+        //        return Conflict(new { msg = "Esse beneficio já existe!" });
+        //    }
+        //    return BadRequest(ModelState);
+        //}
     }
 }
