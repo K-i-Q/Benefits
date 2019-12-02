@@ -100,20 +100,38 @@ namespace Benefits.Controllers
         #endregion
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(Cliente cliente)
+        public async Task<IActionResult> Cadastrar(Cliente cliente, string idSenha, string idConfirmacaoSenha)
         {
+            if(cliente == null)
+            {
+                return View();
+            }
+            if(idSenha == null || idConfirmacaoSenha == null)
+            {
+                return View(cliente);
+            }
+            if (!(idSenha.Equals(idConfirmacaoSenha)))
+            {
+                return View(cliente);
+            }
             if (ModelState.IsValid)
             {
                 //Criar um objeto do UsuarioLogado e passar                 
                 //obrigatoriamente o Email e UserName
+                Usuario usuario = new Usuario();
                 UsuarioLogado usuarioLogado = new UsuarioLogado
                 {
                     Email = cliente.Email,
                     UserName = cliente.Email
                 };
+
+                usuario.Email = cliente.Email;
+                usuario.Senha = idSenha;
+                usuario.ConfirmacaoSenha = idConfirmacaoSenha;
+                usuario.Tipo = false;//[Tipo: false == Cliente]
                 //Cadastra o usuário na tabela do Identity
                 IdentityResult result = await _userManager.
-                    CreateAsync(usuarioLogado, cliente.Senha);
+                    CreateAsync(usuarioLogado, usuario.Senha);
                 //Testar o resultado do cadastro
                 if (result.Succeeded)
                 {
@@ -122,7 +140,7 @@ namespace Benefits.Controllers
                         isPersistent: false);
                     if (_clienteDAO.Cadastrar(cliente))
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", cliente);
                     }
                     ModelState.AddModelError("", "Este e-mail já está sendo utilizado!");
                 }

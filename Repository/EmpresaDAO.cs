@@ -76,7 +76,14 @@ namespace Repository
 
         public Empresa BuscarPorIdentificador(Identificador identificador)
         {
-            return _context.Empresas.FirstOrDefault(identificadorTabela => identificadorTabela.Identificador.Id == identificador.Id);
+            try
+            {
+                return _context.Empresas.FirstOrDefault(identificadorTabela => identificadorTabela.Identificador.Id == identificador.Id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

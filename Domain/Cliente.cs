@@ -13,18 +13,10 @@ namespace Domain
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
-        public string Genero { get; set; }
         public Endereco Endereco { get; set; }
         public Identificador Identificador { get; set; }
         public DateTime CadastradoEm { get; set; }
 
-        [Display(Name = "Senha:")]
-        public string Senha { get; set; }
-
-        [Display(Name = "Confirmação da senha:")]
-        [NotMapped]
-        [Compare("Senha", ErrorMessage = "Os campos não coincidem!")]
-        public string ConfirmacaoSenha { get; set; }
 
         public Cliente()
         {
@@ -37,8 +29,7 @@ namespace Domain
             StringBuilder sb = new StringBuilder();
             sb.Append("[Nome > " + Nome);
             sb.Append(", Email > " + Email);
-            sb.Append(", Telefone > " + Telefone);
-            sb.Append(", Genero > " + Genero+"]");
+            sb.Append(", Genero > " + Telefone+ "]");
             return sb.ToString();
         }
 

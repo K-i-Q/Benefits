@@ -27,7 +27,7 @@ namespace Repository
             {
                 throw ex;
             }
-            
+
         }
 
         public List<Cliente> ListarTodos()
@@ -59,7 +59,7 @@ namespace Repository
             {
                 throw ex;
             }
-            
+
         }
 
         public bool Editar(Cliente cliente)
@@ -70,16 +70,23 @@ namespace Repository
                 _context.SaveChanges();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-            
+
         }
 
         public Cliente BuscarPorIdentificador(Identificador identificador)
         {
-            return _context.Clientes.FirstOrDefault(cliente => cliente.Identificador.Id == identificador.Id);
+            try
+            {
+                return _context.Clientes.FirstOrDefault(cliente => cliente.Identificador.Id == identificador.Id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
