@@ -17,6 +17,14 @@ namespace Domain
         public Endereco Endereco { get; set; }
         public DateTime CadastradoEm { get; set; }
 
+        [Display(Name = "Senha:")]
+        public string Senha { get; set; }
+
+        [Display(Name = "Confirmação da senha:")]
+        [NotMapped]
+        [Compare("Senha", ErrorMessage = "Os campos não coincidem!")]
+        public string ConfirmacaoSenha { get; set; }
+
         public Cliente()
         {
             CadastradoEm = DateTime.Now;

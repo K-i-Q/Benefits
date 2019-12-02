@@ -1,17 +1,27 @@
 ﻿using Domain;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Repository;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace Benefits.Controllers
 {
     public class ClienteController : Controller
     {
         private readonly ClienteDAO _clienteDAO;
-        public ClienteController(ClienteDAO clienteDAO)
+
+        private readonly UserManager<ClienteLogado>
+            _clienteManager;
+        private readonly SignInManager<ClienteLogado>
+            _signManager;
+        public ClienteController(ClienteDAO clienteDAO, UserManager<ClienteLogado> clienteManager,
+            SignInManager<ClienteLogado> signInManager)
         {
             _clienteDAO = clienteDAO;
+            _clienteManager = clienteManager;
+            _signManager = signInManager;
         }
 
         #region Navigation Views Crud
@@ -67,17 +77,17 @@ namespace Benefits.Controllers
         #endregion
 
         #region Crud Actions
-        [HttpPost]
-        public IActionResult Cadastrar(Cliente cliente)
-        {
+        //[HttpPost]
+        //public IActionResult Cadastrar(Cliente cliente)
+        //{
             //TODO: validar campos
             //TODO: Não deixar cadastrar clientes iguais
-            if (_clienteDAO.Cadastrar(cliente))
-            {
-                return RedirectToAction("Index", cliente);
-            }
-            return View(cliente);
-        }
+            //if (_clienteDAO.Cadastrar(cliente))
+            //{
+                //return RedirectToAction("Index", cliente);
+            //}
+            //return View(cliente);
+        //}
         [HttpPost]
         public IActionResult Editar(Cliente cliente)
         {
@@ -91,5 +101,69 @@ namespace Benefits.Controllers
             return RedirectToAction("Index", cliente);
         }
         #endregion
+
+        [HttpPost]
+        public async Task<IActionResult> Cadastrar(Cliente cliente)
+        {
+            if (ModelState.IsValid)
+            {
+                //Criar um objeto do UsuarioLogado e passar                 
+                //obrigatoriamente o Email e UserName
+                ClienteLogado clienteLogado = new ClienteLogado
+                {
+                    //Email = cliente.Email,
+                    //UserName = cliente.Email
+                };
+                //Cadastra o usuário na tabela do Identity
+                IdentityResult result = await _clienteManager.
+                    CreateAsync(clienteLogado, cliente.Senha);
+                //Testar o resultado do cadastro
+                if (result.Succeeded)
+                {
+                    //Logar o usuário no sistema
+                    await _signManager.SignInAsync(clienteLogado,
+                        isPersistent: false);
+                    if (_clienteDAO.Cadastrar(cliente))
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    ModelState.AddModelError("", "Este e-mail já está sendo utilizado!");
+                }
+                AdicionarErros(result);
+            }
+            return View(cliente);
+        }
+        private void AdicionarErros(IdentityResult result)
+        {
+            foreach (var erro in result.Errors)
+            {
+                ModelState.AddModelError
+                    ("", erro.Description);
+            }
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(Cliente cliente)
+        {
+            var result = await _signManager.
+                PasswordSignInAsync(cliente.Email,
+                cliente.Senha, true, lockoutOnFailure: false);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Cliente");
+            }
+            ModelState.AddModelError("", "Falha no login!");
+            return View();
+        }
     }
+
 }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
+using Microsoft.AspNetCore.Identity;
 using Domain;
 
 namespace Benefits
@@ -29,26 +30,38 @@ namespace Benefits
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
-
-            //Config sessão deve ser antes da injeção de dependência do MVC
-            services.AddSession();//habilita sessão
-            services.AddDistributedMemoryCache(); //melhora desempenho(distribui mémória);
-
-
+            //Configurando a injeção de dependência
             services.AddScoped<ClienteDAO>();
             services.AddScoped<EmpresaDAO>();
             services.AddScoped<BeneficioDAO>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<Context>
+            services.AddDbContext < Context >
                 (options => options.UseSqlServer(
                 Configuration.GetConnectionString
                 ("BenefitsConnection")));
-        }
+        
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        //Config sessão deve ser antes da injeção de dependência do MVC
+        services.AddSession();//habilita sessão
+            services.AddDistributedMemoryCache(); //melhora desempenho(distribui mémória);
+
+              //Configurar o Identity na aplicação
+            //services.AddIdentity<ClienteLogado, IdentityRole>().
+                //AddEntityFrameworkStores<Context>().
+                //AddDefaultTokenProviders();
+
+        services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Usuario/Login";
+                options.AccessDeniedPath = "/Usuario/AcessoNegado";
+            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+}
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
