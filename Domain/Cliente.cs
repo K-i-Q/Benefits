@@ -15,6 +15,7 @@ namespace Domain
         public string Telefone { get; set; }
         public string Genero { get; set; }
         public Endereco Endereco { get; set; }
+        public Identificador Identificador { get; set; }
         public DateTime CadastradoEm { get; set; }
 
         [Display(Name = "Senha:")]
@@ -28,6 +29,7 @@ namespace Domain
         public Cliente()
         {
             CadastradoEm = DateTime.Now;
+            Identificador = new Identificador();
         }
 
         public override string ToString()

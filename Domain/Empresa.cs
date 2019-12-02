@@ -15,12 +15,14 @@ namespace Domain
         public string Email { get; set; }
         public string Senha { get; set; }
         public string Telefone { get; set; }
+        public Identificador Identificador { get; set; }
         public Endereco Endereco { get; set; }
         public DateTime CriadaEm { get; set; }
 
         public Empresa()
         {
             CriadaEm = DateTime.Now;
+            Identificador = new Identificador();
         }
 
         public override bool Equals(object obj)

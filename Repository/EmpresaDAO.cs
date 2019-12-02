@@ -73,5 +73,10 @@ namespace Repository
                 throw ex;
             }
         }
+
+        public Empresa BuscarPorIdentificador(Identificador identificador)
+        {
+            return _context.Empresas.FirstOrDefault(identificadorTabela => identificadorTabela.Identificador.Id == identificador.Id);
+        }
     }
 }

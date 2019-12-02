@@ -76,5 +76,10 @@ namespace Repository
             }
             
         }
+
+        public Cliente BuscarPorIdentificador(Identificador identificador)
+        {
+            return _context.Clientes.FirstOrDefault(cliente => cliente.Identificador.Id == identificador.Id);
+        }
     }
 }

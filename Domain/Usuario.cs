@@ -24,5 +24,11 @@ namespace Domain
         [Compare("Senha",ErrorMessage ="Senhas não batem")]
         public string  ConfirmacaoSenha { get; set; }
 
+        [Display(Name ="Eu sou...")]
+        [NotMapped]
+        public bool Tipo { get; set; }
+
+        public Identificador Identificador { get; set; }
+
     }
 }
