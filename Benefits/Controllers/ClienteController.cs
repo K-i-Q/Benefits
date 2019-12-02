@@ -11,17 +11,14 @@ namespace Benefits.Controllers
     public class ClienteController : Controller
     {
         private readonly ClienteDAO _clienteDAO;
+        private readonly UserManager<UsuarioLogado> _userManager;
+        private readonly SignInManager<UsuarioLogado> _signInManager;
 
-        private readonly UserManager<ClienteLogado>
-            _clienteManager;
-        private readonly SignInManager<ClienteLogado>
-            _signManager;
-        public ClienteController(ClienteDAO clienteDAO, UserManager<ClienteLogado> clienteManager,
-            SignInManager<ClienteLogado> signInManager)
+        public ClienteController(ClienteDAO clienteDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
         {
             _clienteDAO = clienteDAO;
-            _clienteManager = clienteManager;
-            _signManager = signInManager;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         #region Navigation Views Crud
@@ -109,19 +106,19 @@ namespace Benefits.Controllers
             {
                 //Criar um objeto do UsuarioLogado e passar                 
                 //obrigatoriamente o Email e UserName
-                ClienteLogado clienteLogado = new ClienteLogado
+                UsuarioLogado usuarioLogado = new UsuarioLogado
                 {
-                    //Email = cliente.Email,
-                    //UserName = cliente.Email
+                    Email = cliente.Email,
+                    UserName = cliente.Email
                 };
                 //Cadastra o usuário na tabela do Identity
-                IdentityResult result = await _clienteManager.
-                    CreateAsync(clienteLogado, cliente.Senha);
+                IdentityResult result = await _userManager.
+                    CreateAsync(usuarioLogado, cliente.Senha);
                 //Testar o resultado do cadastro
                 if (result.Succeeded)
                 {
                     //Logar o usuário no sistema
-                    await _signManager.SignInAsync(clienteLogado,
+                    await _signInManager.SignInAsync(usuarioLogado,
                         isPersistent: false);
                     if (_clienteDAO.Cadastrar(cliente))
                     {
@@ -142,28 +139,7 @@ namespace Benefits.Controllers
             }
         }
 
-        public async Task<IActionResult> Logout()
-        {
-            await _signManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
-        }
-        public IActionResult Login()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> Login(Cliente cliente)
-        {
-            var result = await _signManager.
-                PasswordSignInAsync(cliente.Email,
-                cliente.Senha, true, lockoutOnFailure: false);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Cliente");
-            }
-            ModelState.AddModelError("", "Falha no login!");
-            return View();
-        }
+        
     }
 
 }

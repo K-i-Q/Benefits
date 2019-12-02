@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Domain
 {
-    public class ClienteLogado : IdentityUser
+    public class UsuarioLogado : IdentityUser
     {
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
-    public class Context : IdentityDbContext<ClienteLogado>
+    public class Context : IdentityDbContext<UsuarioLogado>
     {
         public Context(DbContextOptions<Context> options) : base(options) { }
 
@@ -14,5 +14,6 @@ namespace Repository
         public DbSet<Plano> Planos { get; set; }
         public DbSet<EmpresaCliente> EmpresaClientes { get; set; }
         public DbSet<EmpresaEmpresa> EmpresaEmpresas { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }

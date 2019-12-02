@@ -47,7 +47,7 @@ namespace Benefits
             services.AddDistributedMemoryCache(); //melhora desempenho(distribui mémória);
 
               //Configurar o Identity na aplicação
-            services.AddIdentity<ClienteLogado, IdentityRole>().
+            services.AddIdentity<UsuarioLogado, IdentityRole>().
                 AddEntityFrameworkStores<Context>().
                 AddDefaultTokenProviders();
 
