@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191203000633_db02122019")]
-    partial class db02122019
+    [Migration("20191203020004_AddClassUsuario")]
+    partial class AddClassUsuario
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,7 +35,8 @@ namespace Repository.Migrations
 
                     b.Property<int>("Nivel");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired();
 
                     b.HasKey("BeneficioId");
 
@@ -52,15 +53,18 @@ namespace Repository.Migrations
 
                     b.Property<DateTime>("CadastradoEm");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
                     b.Property<long?>("EnderecoId");
 
                     b.Property<int?>("IdentificadorId");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired();
 
-                    b.Property<string>("Telefone");
+                    b.Property<string>("Telefone")
+                        .IsRequired();
 
                     b.HasKey("ClienteId");
 
@@ -77,19 +81,24 @@ namespace Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Cnpj");
+                    b.Property<string>("Cnpj")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("CriadaEm");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
                     b.Property<long?>("EnderecoId");
 
                     b.Property<int?>("IdentificadorId");
 
-                    b.Property<string>("Razao");
+                    b.Property<string>("Razao")
+                        .IsRequired();
 
-                    b.Property<string>("Telefone");
+                    b.Property<string>("Telefone")
+                        .IsRequired();
 
                     b.HasKey("EmpresaId");
 

@@ -100,17 +100,17 @@ namespace Benefits.Controllers
         #endregion
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(Cliente cliente, string idSenha, string idConfirmacaoSenha)
+        public async Task<IActionResult> Cadastrar(Cliente cliente, string Senha, string ConfirmacaoSenha)
         {
             if(cliente == null)
             {
                 return View();
             }
-            if(idSenha == null || idConfirmacaoSenha == null)
+            if(Senha == null || ConfirmacaoSenha == null)
             {
                 return View(cliente);
             }
-            if (!(idSenha.Equals(idConfirmacaoSenha)))
+            if (!(Senha.Equals(ConfirmacaoSenha)))
             {
                 return View(cliente);
             }
@@ -126,8 +126,8 @@ namespace Benefits.Controllers
                 };
 
                 usuario.Email = cliente.Email;
-                usuario.Senha = idSenha;
-                usuario.ConfirmacaoSenha = idConfirmacaoSenha;
+                usuario.Senha = Senha;
+                usuario.ConfirmacaoSenha = ConfirmacaoSenha;
                 usuario.Tipo = false;//[Tipo: false == Cliente]
                 //Cadastra o usuário na tabela do Identity
                 IdentityResult result = await _userManager.

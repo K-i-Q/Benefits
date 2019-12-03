@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class db02122019 : Migration
+    public partial class AddClassUsuario : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -190,9 +190,9 @@ namespace Repository.Migrations
                 {
                     ClienteId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Telefone = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Telefone = table.Column<string>(nullable: false),
                     EnderecoId = table.Column<long>(nullable: true),
                     IdentificadorId = table.Column<int>(nullable: true),
                     CadastradoEm = table.Column<DateTime>(nullable: false)
@@ -220,10 +220,10 @@ namespace Repository.Migrations
                 {
                     EmpresaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Cnpj = table.Column<string>(nullable: true),
-                    Razao = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Telefone = table.Column<string>(nullable: true),
+                    Cnpj = table.Column<string>(maxLength: 100, nullable: false),
+                    Razao = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Telefone = table.Column<string>(nullable: false),
                     IdentificadorId = table.Column<int>(nullable: true),
                     EnderecoId = table.Column<long>(nullable: true),
                     CriadaEm = table.Column<DateTime>(nullable: false)
@@ -272,7 +272,7 @@ namespace Repository.Migrations
                 {
                     BeneficioId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(nullable: false),
                     Nivel = table.Column<int>(nullable: false),
                     Descricao = table.Column<string>(nullable: true),
                     CriadoEm = table.Column<DateTime>(nullable: false),
