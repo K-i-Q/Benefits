@@ -32,36 +32,41 @@ namespace Benefits.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Usuario usuario)
         {
-            if(usuario.Email == null || usuario.Senha == null)
+            var usuarioAuxiliar = _usuarioDAO.BuscarPorEmail(usuario.Email);
+            if (usuario.Email == null || usuario.Senha == null)
             {
                 return View();
             }
             var signInResult = await _signInManager.PasswordSignInAsync(usuario.Email, usuario.Senha, true, lockoutOnFailure: false);
-
-            if (signInResult.Succeeded)
+            if (usuarioAuxiliar != null)
             {
-                if (usuario.Tipo)
-                {
-                    //empresa[Tipo: true]
-                    Empresa empresa = new Empresa();
-                    empresa = _empresaDAO.BuscarPorIdentificador(usuario.Identificador);
-                    if(empresa != null)
-                    {
-                        RedirectToAction("Index",empresa);
-                    }
-                }
-                else
-                {
-                    //cliente[Tipo: false]
-                    Cliente cliente = new Cliente();
-                    cliente = _clienteDAO.BuscarPorIdentificador(usuario.Identificador);
-                    if(cliente != null)
-                    {
-                        RedirectToAction("Index", cliente);
-                    }
-                }
 
+                if (signInResult.Succeeded)
+                {
+                    if (usuarioAuxiliar.Tipo)
+                    {
+                        //empresa[Tipo: true]
+                        Empresa empresa = new Empresa();
+                        empresa = _empresaDAO.BuscarPorIdentificador(usuarioAuxiliar.Identificador);
+                        if (empresa != null)
+                        {
+                            RedirectToAction("Index", "Empresa", empresa);
+                        }
+                    }
+                    else
+                    {
+                        //cliente[Tipo: false]
+                        Cliente cliente = new Cliente();
+                        cliente = _clienteDAO.BuscarPorIdentificador(usuarioAuxiliar.Identificador);
+                        if (cliente != null)
+                        {
+                            return RedirectToAction("Index", "Cliente", cliente);
+                        }
+                    }
+
+                }
             }
+
             return View(usuario);
         }
     }

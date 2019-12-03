@@ -28,7 +28,8 @@ namespace Domain
         [NotMapped]
         public bool Tipo { get; set; }
 
-        public Identificador Identificador { get; set; }
+        public string Identificador { get; set; }
+
 
     }
 }

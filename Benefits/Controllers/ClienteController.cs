@@ -11,14 +11,16 @@ namespace Benefits.Controllers
     public class ClienteController : Controller
     {
         private readonly ClienteDAO _clienteDAO;
+        private readonly UsuarioDAO _usuarioDAO;
         private readonly UserManager<UsuarioLogado> _userManager;
         private readonly SignInManager<UsuarioLogado> _signInManager;
 
-        public ClienteController(ClienteDAO clienteDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
+        public ClienteController(ClienteDAO clienteDAO, UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
         {
             _clienteDAO = clienteDAO;
             _userManager = userManager;
             _signInManager = signInManager;
+            _usuarioDAO = usuarioDAO;
         }
 
         #region Navigation Views Crud
@@ -129,22 +131,26 @@ namespace Benefits.Controllers
                 usuario.Senha = Senha;
                 usuario.ConfirmacaoSenha = ConfirmacaoSenha;
                 usuario.Tipo = false;//[Tipo: false == Cliente]
-                //Cadastra o usuário na tabela do Identity
-                IdentityResult result = await _userManager.
-                    CreateAsync(usuarioLogado, usuario.Senha);
-                //Testar o resultado do cadastro
-                if (result.Succeeded)
+                usuario.Identificador = cliente.Identificador;
+                if (_usuarioDAO.Cadastrar(usuario))
                 {
-                    //Logar o usuário no sistema
-                    await _signInManager.SignInAsync(usuarioLogado,
-                        isPersistent: false);
-                    if (_clienteDAO.Cadastrar(cliente))
+                    IdentityResult result = await _userManager.
+                    CreateAsync(usuarioLogado, usuario.Senha);
+                    //Testar o resultado do cadastro
+                    if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", cliente);
+                        //Logar o usuário no sistema
+                        await _signInManager.SignInAsync(usuarioLogado,
+                            isPersistent: false);
+                        if (_clienteDAO.Cadastrar(cliente))
+                        {
+                            return RedirectToAction("Index", cliente);
+                        }
+                        ModelState.AddModelError("", "Este e-mail já está sendo utilizado!");
                     }
-                    ModelState.AddModelError("", "Este e-mail já está sendo utilizado!");
+                    AdicionarErros(result);
                 }
-                AdicionarErros(result);
+                //Cadastra o usuário na tabela do Identity
             }
             return View(cliente);
         }

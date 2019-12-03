@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class AddClassUsuario : Migration
+    public partial class ChangePropertyGuid : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,16 +66,18 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Identificadores",
+                name: "Usuarios",
                 columns: table => new
                 {
-                    IdentificadorId = table.Column<int>(nullable: false)
+                    UsuarioId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Id = table.Column<Guid>(nullable: false)
+                    Email = table.Column<string>(nullable: true),
+                    Senha = table.Column<string>(nullable: true),
+                    Identificador = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Identificadores", x => x.IdentificadorId);
+                    table.PrimaryKey("PK_Usuarios", x => x.UsuarioId);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,7 +196,7 @@ namespace Repository.Migrations
                     Email = table.Column<string>(nullable: false),
                     Telefone = table.Column<string>(nullable: false),
                     EnderecoId = table.Column<long>(nullable: true),
-                    IdentificadorId = table.Column<int>(nullable: true),
+                    Identificador = table.Column<string>(nullable: true),
                     CadastradoEm = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -205,12 +207,6 @@ namespace Repository.Migrations
                         column: x => x.EnderecoId,
                         principalTable: "Enderecos",
                         principalColumn: "EnderecoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Clientes_Identificadores_IdentificadorId",
-                        column: x => x.IdentificadorId,
-                        principalTable: "Identificadores",
-                        principalColumn: "IdentificadorId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -224,7 +220,7 @@ namespace Repository.Migrations
                     Razao = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     Telefone = table.Column<string>(nullable: false),
-                    IdentificadorId = table.Column<int>(nullable: true),
+                    Identificador = table.Column<string>(nullable: true),
                     EnderecoId = table.Column<long>(nullable: true),
                     CriadaEm = table.Column<DateTime>(nullable: false)
                 },
@@ -236,33 +232,6 @@ namespace Repository.Migrations
                         column: x => x.EnderecoId,
                         principalTable: "Enderecos",
                         principalColumn: "EnderecoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Empresas_Identificadores_IdentificadorId",
-                        column: x => x.IdentificadorId,
-                        principalTable: "Identificadores",
-                        principalColumn: "IdentificadorId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Usuarios",
-                columns: table => new
-                {
-                    UsuarioId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(nullable: true),
-                    Senha = table.Column<string>(nullable: true),
-                    IdentificadorId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Usuarios", x => x.UsuarioId);
-                    table.ForeignKey(
-                        name: "FK_Usuarios_Identificadores_IdentificadorId",
-                        column: x => x.IdentificadorId,
-                        principalTable: "Identificadores",
-                        principalColumn: "IdentificadorId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -424,11 +393,6 @@ namespace Repository.Migrations
                 column: "EnderecoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clientes_IdentificadorId",
-                table: "Clientes",
-                column: "IdentificadorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ClientesDaEmpresa_ClienteId",
                 table: "ClientesDaEmpresa",
                 column: "ClienteId");
@@ -449,11 +413,6 @@ namespace Repository.Migrations
                 column: "EnderecoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Empresas_IdentificadorId",
-                table: "Empresas",
-                column: "IdentificadorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ParceiroDaEmpresa_EmpresaDoisEmpresaId",
                 table: "ParceiroDaEmpresa",
                 column: "EmpresaDoisEmpresaId");
@@ -467,11 +426,6 @@ namespace Repository.Migrations
                 name: "IX_Planos_EmpresaId",
                 table: "Planos",
                 column: "EmpresaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_IdentificadorId",
-                table: "Usuarios",
-                column: "IdentificadorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -520,9 +474,6 @@ namespace Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Enderecos");
-
-            migrationBuilder.DropTable(
-                name: "Identificadores");
         }
     }
 }

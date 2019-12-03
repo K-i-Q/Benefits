@@ -21,14 +21,14 @@ namespace Domain
         public string Telefone { get; set; }
 
         public Endereco Endereco { get; set; }
-        public Identificador Identificador { get; set; }
+        public string Identificador { get; set; }
         public DateTime CadastradoEm { get; set; }
 
 
         public Cliente()
         {
             CadastradoEm = DateTime.Now;
-            Identificador = new Identificador();
+            Identificador = Guid.NewGuid().ToString();
         }
 
         public override string ToString()

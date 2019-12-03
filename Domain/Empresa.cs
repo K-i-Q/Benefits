@@ -25,14 +25,14 @@ namespace Domain
         [Required(ErrorMessage = "Campo obrigatório!")]
         public string Telefone { get; set; }
 
-        public Identificador Identificador { get; set; }
+        public string Identificador { get; set; }
         public Endereco Endereco { get; set; }
         public DateTime CriadaEm { get; set; }
 
         public Empresa()
         {
             CriadaEm = DateTime.Now;
-            Identificador = new Identificador();
+            Identificador = Guid.NewGuid().ToString();
         }
 
         public override bool Equals(object obj)

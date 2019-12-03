@@ -56,7 +56,7 @@ namespace Repository.Migrations
 
                     b.Property<long?>("EnderecoId");
 
-                    b.Property<int?>("IdentificadorId");
+                    b.Property<string>("Identificador");
 
                     b.Property<string>("Nome")
                         .IsRequired();
@@ -67,8 +67,6 @@ namespace Repository.Migrations
                     b.HasKey("ClienteId");
 
                     b.HasIndex("EnderecoId");
-
-                    b.HasIndex("IdentificadorId");
 
                     b.ToTable("Clientes");
                 });
@@ -90,7 +88,7 @@ namespace Repository.Migrations
 
                     b.Property<long?>("EnderecoId");
 
-                    b.Property<int?>("IdentificadorId");
+                    b.Property<string>("Identificador");
 
                     b.Property<string>("Razao")
                         .IsRequired();
@@ -101,8 +99,6 @@ namespace Repository.Migrations
                     b.HasKey("EmpresaId");
 
                     b.HasIndex("EnderecoId");
-
-                    b.HasIndex("IdentificadorId");
 
                     b.ToTable("Empresas");
                 });
@@ -178,19 +174,6 @@ namespace Repository.Migrations
                     b.ToTable("Enderecos");
                 });
 
-            modelBuilder.Entity("Domain.Identificador", b =>
-                {
-                    b.Property<int>("IdentificadorId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<Guid>("Id");
-
-                    b.HasKey("IdentificadorId");
-
-                    b.ToTable("Identificadores");
-                });
-
             modelBuilder.Entity("Domain.Plano", b =>
                 {
                     b.Property<int>("PlanoId")
@@ -222,13 +205,11 @@ namespace Repository.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<int?>("IdentificadorId");
+                    b.Property<string>("Identificador");
 
                     b.Property<string>("Senha");
 
                     b.HasKey("UsuarioId");
-
-                    b.HasIndex("IdentificadorId");
 
                     b.ToTable("Usuarios");
                 });
@@ -406,10 +387,6 @@ namespace Repository.Migrations
                     b.HasOne("Domain.Endereco", "Endereco")
                         .WithMany()
                         .HasForeignKey("EnderecoId");
-
-                    b.HasOne("Domain.Identificador", "Identificador")
-                        .WithMany()
-                        .HasForeignKey("IdentificadorId");
                 });
 
             modelBuilder.Entity("Domain.Empresa", b =>
@@ -417,10 +394,6 @@ namespace Repository.Migrations
                     b.HasOne("Domain.Endereco", "Endereco")
                         .WithMany()
                         .HasForeignKey("EnderecoId");
-
-                    b.HasOne("Domain.Identificador", "Identificador")
-                        .WithMany()
-                        .HasForeignKey("IdentificadorId");
                 });
 
             modelBuilder.Entity("Domain.EmpresaCliente", b =>
@@ -454,13 +427,6 @@ namespace Repository.Migrations
                     b.HasOne("Domain.Empresa", "Empresa")
                         .WithMany()
                         .HasForeignKey("EmpresaId");
-                });
-
-            modelBuilder.Entity("Domain.Usuario", b =>
-                {
-                    b.HasOne("Domain.Identificador", "Identificador")
-                        .WithMany()
-                        .HasForeignKey("IdentificadorId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

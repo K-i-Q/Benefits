@@ -77,11 +77,11 @@ namespace Repository
 
         }
 
-        public Cliente BuscarPorIdentificador(Identificador identificador)
+        public Cliente BuscarPorIdentificador(string identificador)
         {
             try
             {
-                return _context.Clientes.FirstOrDefault(cliente => cliente.Identificador.Id == identificador.Id);
+                return _context.Clientes.FirstOrDefault(cliente => cliente.Identificador == identificador);
             }
             catch (Exception ex)
             {

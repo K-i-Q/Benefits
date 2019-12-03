@@ -74,11 +74,11 @@ namespace Repository
             }
         }
 
-        public Empresa BuscarPorIdentificador(Identificador identificador)
+        public Empresa BuscarPorIdentificador(string identificador)
         {
             try
             {
-                return _context.Empresas.FirstOrDefault(identificadorTabela => identificadorTabela.Identificador.Id == identificador.Id);
+                return _context.Empresas.FirstOrDefault(identificadorTabela => identificadorTabela.Identificador == identificador);
             }
             catch (Exception ex)
             {

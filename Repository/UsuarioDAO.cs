@@ -64,5 +64,10 @@ namespace Repository
                 throw ex;
             }
         }
+
+        public Usuario BuscarPorEmail(string email)
+        {
+            return _context.Usuarios.FirstOrDefault(usuario => usuario.Email.Equals(email));
+        }
     }
 }
