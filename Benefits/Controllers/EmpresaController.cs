@@ -39,21 +39,21 @@ namespace Benefits.Controllers
 
         #region Crud Actions
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(Empresa empresa, string idSenha, string idConfirmacaoSenha)
+        public async Task<IActionResult> Cadastrar(Empresa empresa, string Senha, string ConfirmacaoSenha)
         {
             if(empresa == null)
             {
                 return View();
             }
-            if(idSenha == null || idSenha == "")
+            if(Senha == null || Senha == "")
             {
                 return View(empresa);
             }
-            if (idConfirmacaoSenha == null || idConfirmacaoSenha == "")
+            if (ConfirmacaoSenha == null || ConfirmacaoSenha == "")
             {
                 return View(empresa);
             }
-            if (!(idSenha.Equals(idConfirmacaoSenha)))
+            if (!(Senha.Equals(ConfirmacaoSenha)))
             {
                 return View(empresa);
             }
@@ -66,8 +66,8 @@ namespace Benefits.Controllers
                     UserName = empresa.Email
                 };
                 usuario.Email = empresa.Email;
-                usuario.Senha = idSenha;
-                usuario.ConfirmacaoSenha = idConfirmacaoSenha;
+                usuario.Senha = Senha;
+                usuario.ConfirmacaoSenha = ConfirmacaoSenha;
                 usuario.Tipo = true;//[Tipo: true == Empresa]
 
                 IdentityResult result = await _userManager.
