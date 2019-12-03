@@ -23,6 +23,7 @@ namespace Benefits.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
@@ -31,6 +32,10 @@ namespace Benefits.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Usuario usuario)
         {
+            if(usuario.Email == null || usuario.Senha == null)
+            {
+                return View();
+            }
             var signInResult = await _signInManager.PasswordSignInAsync(usuario.Email, usuario.Senha, true, lockoutOnFailure: false);
 
             if (signInResult.Succeeded)
@@ -57,7 +62,7 @@ namespace Benefits.Controllers
                 }
 
             }
-            return View();
+            return View(usuario);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Repository
 {
-    class PlanoDAO : IRepository<Plano>
+    public class PlanoDAO : IRepository<Plano>
     {
         private readonly Context _context;
         public PlanoDAO(Context context)

@@ -31,6 +31,8 @@ namespace Benefits
             });
 
             //Configurando a injeção de dependência
+            services.AddScoped<UsuarioDAO>();
+            services.AddScoped<PlanoDAO>();
             services.AddScoped<ClienteDAO>();
             services.AddScoped<EmpresaDAO>();
             services.AddScoped<BeneficioDAO>();

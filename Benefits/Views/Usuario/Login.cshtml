@@ -24,12 +24,8 @@
                 <span asp-validation-for="Senha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConfirmacaoSenha" class="control-label"></label>
-                <input asp-for="ConfirmacaoSenha" class="form-control" />
-                <span asp-validation-for="ConfirmacaoSenha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Acessar" class="btn btn-default" />
+                <input type="submit" value="Acessar" class="btn btn-success" />
+                <a asp-action="Home" asp-controller="Home" value="Voltar" class="btn btn-warning" >Voltar</a>
             </div>
         </form>
     </div>
