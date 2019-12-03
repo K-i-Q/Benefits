@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Repository;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -10,13 +11,18 @@ namespace Benefits.Controllers
 {
     public class ClienteController : Controller
     {
+
+        private readonly EmpresaClienteDAO _empresaClienteDAO;
         private readonly ClienteDAO _clienteDAO;
+        private readonly EmpresaDAO _empresaDAO;
         private readonly UsuarioDAO _usuarioDAO;
         private readonly UserManager<UsuarioLogado> _userManager;
         private readonly SignInManager<UsuarioLogado> _signInManager;
 
-        public ClienteController(ClienteDAO clienteDAO, UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
+        public ClienteController(EmpresaClienteDAO empresaClienteDAO, EmpresaDAO empresaDAO, ClienteDAO clienteDAO, UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
         {
+            _empresaClienteDAO = empresaClienteDAO;
+            _empresaDAO = empresaDAO;
             _clienteDAO = clienteDAO;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -31,7 +37,7 @@ namespace Benefits.Controllers
         public IActionResult Cadastrar()
         {
             Cliente cliente = new Cliente();
-            if(TempData["Endereco"] != null)
+            if (TempData["Endereco"] != null)
             {
                 string resultado = TempData["Endereco"].ToString();
                 Endereco endereco = JsonConvert.DeserializeObject<Endereco>(resultado);
@@ -61,10 +67,7 @@ namespace Benefits.Controllers
         #endregion
 
         #region Navigation Views
-        public IActionResult Empresas()
-        {
-            return View();
-        }
+
         public IActionResult Parceiros()
         {
             return View();
@@ -79,13 +82,13 @@ namespace Benefits.Controllers
         //[HttpPost]
         //public IActionResult Cadastrar(Cliente cliente)
         //{
-            //TODO: validar campos
-            //TODO: Não deixar cadastrar clientes iguais
-            //if (_clienteDAO.Cadastrar(cliente))
-            //{
-                //return RedirectToAction("Index", cliente);
-            //}
-            //return View(cliente);
+        //TODO: validar campos
+        //TODO: Não deixar cadastrar clientes iguais
+        //if (_clienteDAO.Cadastrar(cliente))
+        //{
+        //return RedirectToAction("Index", cliente);
+        //}
+        //return View(cliente);
         //}
         [HttpPost]
         public IActionResult Editar(Cliente cliente)
@@ -101,14 +104,69 @@ namespace Benefits.Controllers
         }
         #endregion
 
+        #region EMRPESAS
+
+        public IActionResult Empresas()
+        {
+            return View(_empresaDAO.ListarTodos());
+        }
+
+
+        public IActionResult EmpresaParceria(int? id)
+        {
+            TempData["id"] = id;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult EmpresaParceria(EmpresaCliente empresaCliente)
+        {
+            try
+            {
+                int idEmpresa = Convert.ToInt32(TempData["id"].ToString());
+                empresaCliente.Empresa = _empresaDAO.BuscarPorId(idEmpresa);
+                //TODO: MEU ID... FUNC PARA PEGAR.
+                empresaCliente.Cliente = _clienteDAO.BuscarPorId(1);
+                _empresaClienteDAO.Cadastrar(empresaCliente);
+                return RedirectToAction("empresas");
+            }
+            catch (System.Exception)
+            {
+                return View(empresaCliente);
+                throw;
+            }
+        }
+
+        public IActionResult EmpresaParceriasMinhas()
+        {
+            //todo: int? id
+            //TODO: ALTERAR PARA ListarTodosPorCliente, QUANDO FIZER FUNÇAO DA PESSOA ON.
+            return View(_empresaClienteDAO.ListarTodos());
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #endregion
+
         [HttpPost]
         public async Task<IActionResult> Cadastrar(Cliente cliente, string Senha, string ConfirmacaoSenha)
         {
-            if(cliente == null)
+            if (cliente == null)
             {
                 return View();
             }
-            if(Senha == null || ConfirmacaoSenha == null)
+            if (Senha == null || ConfirmacaoSenha == null)
             {
                 return View(cliente);
             }
@@ -163,7 +221,7 @@ namespace Benefits.Controllers
             }
         }
 
-        
+
     }
 
 }

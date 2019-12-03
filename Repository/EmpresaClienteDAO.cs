@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,12 @@ namespace Repository
         public List<EmpresaCliente> ListarTodos()
         {
             return _context.EmpresaClientes.ToList();
+        }
+
+        //TODO: VER SE É ID OU OBJETO
+        public List<EmpresaCliente> ListarTodosPorCliente(int? id)
+        {
+            return _context.EmpresaClientes.Include(x => x.Cliente.ClienteId == id).ToList();
         }
 
         public bool Remover(EmpresaCliente empresaCliente)
