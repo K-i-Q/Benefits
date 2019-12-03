@@ -32,6 +32,14 @@ namespace Benefits.Controllers
             return View();
         }
 
+
+        public IActionResult BeneficiosCreate()
+        {
+            //TODO: LISTAR TODOS POR ID, CORRIGIR
+            return View(_beneficioDAO.ListarTodos());
+        }
+        [HttpPost]
+
         public IActionResult Beneficios()
         {
             return View();
