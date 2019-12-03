@@ -9,12 +9,14 @@ namespace Benefits.Controllers
     public class EmpresaController : Controller
     {
         private readonly EmpresaDAO _empresaDAO;
+        private readonly UsuarioDAO _usuarioDAO;
         private readonly UserManager<UsuarioLogado> _userManager;
         private readonly SignInManager<UsuarioLogado> _signInManager;
 
-        public EmpresaController(EmpresaDAO empresaDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
+        public EmpresaController(EmpresaDAO empresaDAO,UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
         {
             _empresaDAO = empresaDAO;
+            _usuarioDAO = usuarioDAO;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -41,11 +43,11 @@ namespace Benefits.Controllers
         [HttpPost]
         public async Task<IActionResult> Cadastrar(Empresa empresa, string Senha, string ConfirmacaoSenha)
         {
-            if(empresa == null)
+            if (empresa == null)
             {
                 return View();
             }
-            if(Senha == null || Senha == "")
+            if (Senha == null || Senha == "")
             {
                 return View(empresa);
             }
@@ -69,20 +71,23 @@ namespace Benefits.Controllers
                 usuario.Senha = Senha;
                 usuario.ConfirmacaoSenha = ConfirmacaoSenha;
                 usuario.Tipo = true;//[Tipo: true == Empresa]
-
-                IdentityResult result = await _userManager.
-                    CreateAsync(usuarioLogado, usuario.Senha);
-                if (result.Succeeded)
+                usuario.Identificador = empresa.Identificador;
+                if (_usuarioDAO.Cadastrar(usuario))
                 {
-                    await _signInManager.SignInAsync(usuarioLogado,
-                        isPersistent: false);
-                    if (_empresaDAO.Cadastrar(empresa))
+                    IdentityResult result = await _userManager.
+                    CreateAsync(usuarioLogado, usuario.Senha);
+                    if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", empresa);
+                        await _signInManager.SignInAsync(usuarioLogado,
+                            isPersistent: false);
+                        if (_empresaDAO.Cadastrar(empresa))
+                        {
+                            return RedirectToAction("Index", empresa);
+                        }
+                        ModelState.AddModelError("", "Este e-mail já está sendo utilizado!");
                     }
-                    ModelState.AddModelError("", "Este e-mail já está sendo utilizado!");
+                    AdicionarErros(result);
                 }
-                AdicionarErros(result);
             }
             return View(empresa);
         }

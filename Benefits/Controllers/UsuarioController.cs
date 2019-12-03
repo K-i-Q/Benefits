@@ -50,7 +50,7 @@ namespace Benefits.Controllers
                         empresa = _empresaDAO.BuscarPorIdentificador(usuarioAuxiliar.Identificador);
                         if (empresa != null)
                         {
-                            RedirectToAction("Index", "Empresa", empresa);
+                            return RedirectToAction("Index", "Empresa", empresa);
                         }
                     }
                     else

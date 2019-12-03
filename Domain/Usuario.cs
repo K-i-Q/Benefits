@@ -25,7 +25,6 @@ namespace Domain
         public string  ConfirmacaoSenha { get; set; }
 
         [Display(Name ="Eu sou...")]
-        [NotMapped]
         public bool Tipo { get; set; }
 
         public string Identificador { get; set; }
