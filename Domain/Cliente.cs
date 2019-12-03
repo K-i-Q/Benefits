@@ -10,9 +10,16 @@ namespace Domain
     {
         [Key]
         public int ClienteId { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string Nome { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string Telefone { get; set; }
+
         public Endereco Endereco { get; set; }
         public Identificador Identificador { get; set; }
         public DateTime CadastradoEm { get; set; }

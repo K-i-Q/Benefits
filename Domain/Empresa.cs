@@ -10,10 +10,21 @@ namespace Domain
     {
         [Key]
         public int EmpresaId { get; set; }
+
+        [MinLength(5, ErrorMessage = "No mínimo 11 caracteres")]
+        [MaxLength(100, ErrorMessage = "No máximo 11 caracteres")]
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string Cnpj { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string Razao { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string Telefone { get; set; }
+
         public Identificador Identificador { get; set; }
         public Endereco Endereco { get; set; }
         public DateTime CriadaEm { get; set; }

@@ -11,8 +11,13 @@ namespace Domain
     {
         [Key]
         public int BeneficioId { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string Nome { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public int Nivel { get; set; }
+
         public string Descricao { get; set; }
         public DateTime CriadoEm { get; set; }
         public Empresa Empresa { get; set; }
