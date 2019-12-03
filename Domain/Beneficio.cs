@@ -24,7 +24,7 @@ namespace Domain
 
         public Beneficio()
         {
-            //CriadoEm = DateTime.Now;
+            CriadoEm = DateTime.Now;
         }
 
 

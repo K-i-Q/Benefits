@@ -27,6 +27,27 @@ namespace Repository
             }
         }
 
+        public bool ValidaPorNome(Beneficio beneficio)
+        {
+            try
+            {
+                if (_context.Beneficios.FirstOrDefault(x => x.Nome.Equals(beneficio.Nome)) == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                return false;
+                throw;
+            }
+        }
+
         public bool Cadastrar(Beneficio beneficio)
         {
             try

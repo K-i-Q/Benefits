@@ -8,13 +8,15 @@ namespace Benefits.Controllers
 {
     public class EmpresaController : Controller
     {
+        private readonly BeneficioDAO _beneficioDAO;
         private readonly EmpresaDAO _empresaDAO;
         private readonly UsuarioDAO _usuarioDAO;
         private readonly UserManager<UsuarioLogado> _userManager;
         private readonly SignInManager<UsuarioLogado> _signInManager;
 
-        public EmpresaController(EmpresaDAO empresaDAO,UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
+        public EmpresaController(BeneficioDAO beneficioDAO ,EmpresaDAO empresaDAO, UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
         {
+            _beneficioDAO = beneficioDAO;
             _empresaDAO = empresaDAO;
             _usuarioDAO = usuarioDAO;
             _userManager = userManager;
@@ -29,6 +31,47 @@ namespace Benefits.Controllers
         {
             return View();
         }
+
+        public IActionResult Beneficios()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Beneficios(Beneficio beneficio)
+        {
+            if (_beneficioDAO.ValidaPorNome(beneficio))
+            {
+                //TODO: BUSCAR EMPRESA LOGADA.
+                beneficio.Empresa = _empresaDAO.BuscarPorId(1);
+                _beneficioDAO.Cadastrar(beneficio);
+                return RedirectToAction("BeneficiosEdit", beneficio);
+            }
+           
+            return View(beneficio);
+        }
+        public IActionResult BeneficiosEdit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult BeneficiosEdit(Beneficio beneficio)
+        {
+            
+
+            return View(beneficio);
+        }
+
+
+        public IActionResult Clientes()
+        {
+            return View();
+        }
+        public IActionResult Parceiros()
+        {
+            return View();
+        }
+
+
         public IActionResult Editar(int id)
         {
             return View(_empresaDAO.BuscarPorId(id));
