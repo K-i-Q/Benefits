@@ -16,6 +16,7 @@ namespace Domain
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório!")]
+        [Range(1, 3, ErrorMessage = "O nivel deve estar entre 1 e 3")]
         public int Nivel { get; set; }
 
         public string Descricao { get; set; }

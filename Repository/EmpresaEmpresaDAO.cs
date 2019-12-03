@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Repository
 {
-    class EmpresaEmpresaDAO : IRepository<EmpresaEmpresa>
+   public class EmpresaEmpresaDAO : IRepository<EmpresaEmpresa>
     {
         private readonly Context _context;
 

@@ -36,6 +36,8 @@ namespace Benefits
             services.AddScoped<ClienteDAO>();
             services.AddScoped<EmpresaDAO>();
             services.AddScoped<BeneficioDAO>();
+            services.AddScoped<EmpresaClienteDAO>();
+            services.AddScoped<EmpresaEmpresaDAO>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext < Context >

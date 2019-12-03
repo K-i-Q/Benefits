@@ -8,14 +8,18 @@ namespace Benefits.Controllers
 {
     public class EmpresaController : Controller
     {
+        private readonly EmpresaEmpresaDAO _empresaEmpresaDAO;
+        private readonly EmpresaClienteDAO _empresaClienteDAO;
         private readonly BeneficioDAO _beneficioDAO;
         private readonly EmpresaDAO _empresaDAO;
         private readonly UsuarioDAO _usuarioDAO;
         private readonly UserManager<UsuarioLogado> _userManager;
         private readonly SignInManager<UsuarioLogado> _signInManager;
 
-        public EmpresaController(BeneficioDAO beneficioDAO ,EmpresaDAO empresaDAO, UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
+        public EmpresaController(EmpresaEmpresaDAO empresaEmpresaDAO ,EmpresaClienteDAO empresaClienteDAO ,BeneficioDAO beneficioDAO ,EmpresaDAO empresaDAO, UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
         {
+            _empresaClienteDAO = empresaClienteDAO;
+            _empresaEmpresaDAO = empresaEmpresaDAO;
             _beneficioDAO = beneficioDAO;
             _empresaDAO = empresaDAO;
             _usuarioDAO = usuarioDAO;
@@ -31,49 +35,8 @@ namespace Benefits.Controllers
         {
             return View();
         }
+        
 
-
-        public IActionResult BeneficiosCreate()
-        {
-            //TODO: LISTAR TODOS POR ID, CORRIGIR
-            return View(_beneficioDAO.ListarTodos());
-        }
-        [HttpPost]
-
-        public IActionResult Beneficios()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Beneficios(Beneficio beneficio)
-        {
-            if (_beneficioDAO.ValidaPorNome(beneficio))
-            {
-                //TODO: BUSCAR EMPRESA LOGADA.
-                beneficio.Empresa = _empresaDAO.BuscarPorId(1);
-                _beneficioDAO.Cadastrar(beneficio);
-                return RedirectToAction("BeneficiosEdit", beneficio);
-            }
-           
-            return View(beneficio);
-        }
-        public IActionResult BeneficiosEdit()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult BeneficiosEdit(Beneficio beneficio)
-        {
-            
-
-            return View(beneficio);
-        }
-
-
-        public IActionResult Clientes()
-        {
-            return View();
-        }
         public IActionResult Parceiros()
         {
             return View();
@@ -166,5 +129,65 @@ namespace Benefits.Controllers
         }
 
         #endregion
+
+        #region  EMPRESA CLIENTE
+        //public IActionResult Clientes()
+        //{
+        //    return View(_empresaClienteDAO.ListarTodos());
+        //}
+        //public IActionResult ClientesCreate()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public IActionResult ClientesCreate(Beneficio beneficio)
+        //{
+               
+        //        //return RedirectToAction("BeneficiosView", beneficio);
+
+        //    return View(beneficio);
+        //}
+
+        #endregion
+
+        #region BENEFICIOS 
+        public IActionResult Beneficios()
+        {
+            return View(_beneficioDAO.ListarTodosComEmpresa());
+        }
+        public IActionResult BeneficiosCreate()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult BeneficiosCreate(Beneficio beneficio)
+        {
+            if (_beneficioDAO.ValidaPorNome(beneficio))
+            {
+                //TODO: BUSCAR EMPRESA LOGADA.
+                beneficio.Empresa = _empresaDAO.BuscarPorId(1);
+                _beneficioDAO.Cadastrar(beneficio);
+                return RedirectToAction("BeneficiosDetails", beneficio);
+            }
+
+            return View(beneficio);
+        }
+        public IActionResult BeneficiosEdit(int? id)
+        {
+            return View(_beneficioDAO.BuscarPorId(id));
+        }
+        [HttpPost]
+        public IActionResult BeneficiosEdit(Beneficio beneficio)
+        {
+            _beneficioDAO.Editar(beneficio);
+            return RedirectToAction("BeneficiosView", beneficio);
+        }
+        public IActionResult BeneficiosDetails(Beneficio beneficio)
+        {
+            return View(beneficio);
+        }
+
+        #endregion
+
     }
 }

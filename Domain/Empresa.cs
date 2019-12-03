@@ -17,6 +17,7 @@ namespace Domain
         public string Cnpj { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório!")]
+        [Display(Name = "Empresa")]
         public string Razao { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório!")]

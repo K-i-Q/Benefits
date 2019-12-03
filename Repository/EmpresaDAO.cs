@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 
 namespace Repository
@@ -25,6 +26,7 @@ namespace Repository
             }
             catch (Exception ex)
             {
+                return false;
                 throw ex;
             }
         }
@@ -33,6 +35,8 @@ namespace Repository
         {
             return _context.Empresas.ToList();
         }
+
+
 
         public Empresa BuscarPorId(int? id)
         {
@@ -56,6 +60,7 @@ namespace Repository
             }
             catch (Exception ex)
             {
+                return false;
                 throw ex;
             }
         }
@@ -70,6 +75,7 @@ namespace Repository
             }
             catch (Exception ex)
             {
+                return false;
                 throw ex;
             }
         }

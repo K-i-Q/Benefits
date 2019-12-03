@@ -1,4 +1,4 @@
-﻿@model Domain.Beneficio
+﻿@model IEnumerable<Domain.Beneficio>
 
 @{
     ViewData["Title"] = "Beneficios";
@@ -6,36 +6,55 @@
 
 <h2>Beneficios</h2>
 
-<h4>Beneficio</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Beneficios">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nivel" class="control-label"></label>
-                <input asp-for="Nivel" class="form-control" />
-                <span asp-validation-for="Nivel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+<p>
+    <a class="nav-link" asp-controller="Empresa" asp-action="BeneficiosCreate">Novo Beneficio<span class="sr-only">(current)</span></a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nivel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                Empresa
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CriadoEm)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nivel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Empresa.Razao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CriadoEm)
+                </td>
+                <td>
+                    <a asp-action="BeneficiosEdit" asp-route-id="@item.BeneficioId">Edit</a> |
+                    <a asp-action="BeneficiosDetails" asp-route-id="@item.BeneficioId">Details</a> |
+                    <a asp-action="BeneficiosDelete" asp-route-id="@item.BeneficioId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

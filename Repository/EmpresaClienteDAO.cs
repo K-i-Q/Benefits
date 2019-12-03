@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Repository
 {
-    class EmpresaClienteDAO : IRepository<EmpresaCliente>
+    public class EmpresaClienteDAO : IRepository<EmpresaCliente>
     {
         private readonly Context _context;
 
@@ -40,6 +40,7 @@ namespace Repository
             }
         }
 
+        
         public bool Editar(EmpresaCliente empresaCliente)
         {
             try

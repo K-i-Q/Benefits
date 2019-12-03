@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,6 +80,11 @@ namespace Repository
         public List<Beneficio> ListarTodos()
         {
             return _context.Beneficios.ToList();
+        }
+
+        public List<Beneficio> ListarTodosComEmpresa()
+        {
+            return _context.Beneficios.Include(x=>x.Empresa).ToList();
         }
 
         public bool Remover(Beneficio beneficio)

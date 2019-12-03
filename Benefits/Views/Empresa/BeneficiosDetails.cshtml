@@ -1,0 +1,42 @@
+﻿@model Domain.Beneficio
+
+@{
+    ViewData["Title"] = "BeneficiosDetails";
+}
+
+<h2>BeneficiosDetails</h2>
+
+<div>
+    <h4>Beneficio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nivel)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nivel)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CriadoEm)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CriadoEm)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="BeneficiosEdit" asp-route-id="@Model.BeneficioId">Edit</a> |
+    <a asp-action="Beneficios">Back to List</a>
+</div>
