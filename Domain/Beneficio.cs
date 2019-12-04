@@ -23,6 +23,7 @@ namespace Domain
         public DateTime CriadoEm { get; set; }
         public Empresa Empresa { get; set; }
 
+
         public Beneficio()
         {
             CriadoEm = DateTime.Now;

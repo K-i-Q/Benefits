@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -29,6 +30,8 @@ namespace Domain
         public string Identificador { get; set; }
         public Endereco Endereco { get; set; }
         public DateTime CriadaEm { get; set; }
+        public List<Beneficio> Beneficios { get; set; }
+
 
         public Empresa()
         {

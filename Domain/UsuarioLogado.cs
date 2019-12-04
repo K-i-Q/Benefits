@@ -7,5 +7,9 @@ namespace Domain
 {
     public class UsuarioLogado : IdentityUser
     {
+        public static implicit operator UserManager<object>(UsuarioLogado v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

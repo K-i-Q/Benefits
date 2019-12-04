@@ -16,6 +16,8 @@ namespace Repository
             _context = context;
         }
 
+
+
         public bool Cadastrar(Empresa empresa)
         {
             try
@@ -36,7 +38,17 @@ namespace Repository
             return _context.Empresas.ToList();
         }
 
-
+        public Empresa BuscarPorEmail(String email)
+        {
+            try
+            {
+                return _context.Empresas.FirstOrDefault(x => x.Email.Equals(email));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public Empresa BuscarPorId(int? id)
         {

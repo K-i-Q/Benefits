@@ -74,7 +74,7 @@ namespace Benefits.Controllers
         }
         public IActionResult Beneficios()
         {
-            return View();
+            return View(_empresaClienteDAO.ListarTodosBeneficiosPorId(1));
         }
         #endregion
 

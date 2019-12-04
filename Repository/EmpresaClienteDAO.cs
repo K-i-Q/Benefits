@@ -67,6 +67,11 @@ namespace Repository
             return _context.EmpresaClientes.Include(x => x.Cliente.ClienteId == id).ToList();
         }
 
+        public List<EmpresaCliente> ListarTodosBeneficiosPorId(int? id)
+        {
+            return _context.EmpresaClientes.Where(x=>x.Cliente.ClienteId == id).ToList();
+        }
+
         public bool Remover(EmpresaCliente empresaCliente)
         {
             try

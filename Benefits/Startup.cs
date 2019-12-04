@@ -81,6 +81,7 @@ namespace Benefits
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();//minha aplicação usa sessão
+            app.UseAuthentication();
 
 
             app.UseMvc(routes =>

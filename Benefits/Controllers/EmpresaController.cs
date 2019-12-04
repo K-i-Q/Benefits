@@ -2,7 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
+using System;
 using System.Threading.Tasks;
+
+//PEGAR USUARIO ATUAL
+//UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+//string email = userLogado.Email;
+//beneficio.Empresa = _empresaDAO.BuscarPorEmail(email);
 
 namespace Benefits.Controllers
 {
@@ -16,7 +22,7 @@ namespace Benefits.Controllers
         private readonly UserManager<UsuarioLogado> _userManager;
         private readonly SignInManager<UsuarioLogado> _signInManager;
 
-        public EmpresaController(EmpresaEmpresaDAO empresaEmpresaDAO ,EmpresaClienteDAO empresaClienteDAO ,BeneficioDAO beneficioDAO ,EmpresaDAO empresaDAO, UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
+        public EmpresaController(EmpresaEmpresaDAO empresaEmpresaDAO, EmpresaClienteDAO empresaClienteDAO, BeneficioDAO beneficioDAO, EmpresaDAO empresaDAO, UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
         {
             _empresaClienteDAO = empresaClienteDAO;
             _empresaEmpresaDAO = empresaEmpresaDAO;
@@ -35,7 +41,7 @@ namespace Benefits.Controllers
         {
             return View();
         }
-        
+
 
         public IActionResult Parceiros()
         {
@@ -142,7 +148,7 @@ namespace Benefits.Controllers
         //[HttpPost]
         //public IActionResult ClientesCreate(Beneficio beneficio)
         //{
-               
+
         //        //return RedirectToAction("BeneficiosView", beneficio);
 
         //    return View(beneficio);
@@ -151,21 +157,25 @@ namespace Benefits.Controllers
         #endregion
 
         #region BENEFICIOS 
-        public IActionResult Beneficios()
+        public async Task<IActionResult> Beneficios()
         {
-            return View(_beneficioDAO.ListarTodosComEmpresa());
+            UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            string email = userLogado.Email;
+            var x = _empresaDAO.BuscarPorEmail(email);
+            return View(_beneficioDAO.ListarBeneficiosEmpresa(x.Email));
         }
         public IActionResult BeneficiosCreate()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult BeneficiosCreate(Beneficio beneficio)
+        public async Task<IActionResult> BeneficiosCreate(Beneficio beneficio)
         {
             if (_beneficioDAO.ValidaPorNome(beneficio))
             {
-                //TODO: BUSCAR EMPRESA LOGADA.
-                beneficio.Empresa = _empresaDAO.BuscarPorId(1);
+                UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+                string email = userLogado.Email;
+                beneficio.Empresa = _empresaDAO.BuscarPorEmail(email);
                 _beneficioDAO.Cadastrar(beneficio);
                 return RedirectToAction("BeneficiosDetails", beneficio);
             }
@@ -189,5 +199,13 @@ namespace Benefits.Controllers
 
         #endregion
 
+        #region EMRPESAS
+
+        public IActionResult Empresas()
+        {
+            return View(_empresaDAO.ListarTodos());
+        }
+
+        #endregion
     }
 }

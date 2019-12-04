@@ -40,7 +40,7 @@ namespace Repository
                 {
                     return false;
                 }
-                
+
             }
             catch (Exception e)
             {
@@ -81,10 +81,16 @@ namespace Repository
         {
             return _context.Beneficios.ToList();
         }
-
-        public List<Beneficio> ListarTodosComEmpresa()
+        public List<Beneficio> ListarBeneficiosEmpresa(string email)
         {
-            return _context.Beneficios.Include(x=>x.Empresa).ToList();
+            return _context.Beneficios.Where(x=>x.Empresa.Email.Equals(email)).ToList();
+        }
+
+
+        public List<EmpresaEmpresa> ListarTodosBeneficiosEmpresa(int? id)
+        {
+            //return _context.Beneficios.Include(x => x.Empresa).ToList();
+            return _context.EmpresaEmpresas.Include(x => x.EmpresaUm.Beneficios).Include(x => x.EmpresaDois.Beneficios).Where(x => x.EmpresaUm.EmpresaId == id).ToList();
         }
 
         public bool Remover(Beneficio beneficio)
