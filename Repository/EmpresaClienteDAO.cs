@@ -61,16 +61,24 @@ namespace Repository
             return _context.EmpresaClientes.ToList();
         }
 
+        public List<EmpresaCliente> ListarMinhasEmpresas(string email)
+        {
+            return _context.EmpresaClientes.Where(x=>x.Cliente.Email.Equals(email)).Include(x => x.Empresa).ToList();
+        }
+
         //TODO: VER SE É ID OU OBJETO
         public List<EmpresaCliente> ListarTodosPorCliente(int? id)
         {
             return _context.EmpresaClientes.Include(x => x.Cliente.ClienteId == id).ToList();
         }
 
-        public List<EmpresaCliente> ListarTodosBeneficiosPorId(int? id)
+        //===============================================================================================
+        //A FAZER ESSA FUNÇAO
+        public List<EmpresaCliente> ListarTodosBeneficiosPorEmail(string email)
         {
-            return _context.EmpresaClientes.Where(x=>x.Cliente.ClienteId == id).ToList();
+            return _context.EmpresaClientes.Where(x=>x.Cliente.Email.Equals(email)).ToList();
         }
+        //===============================================================================================
 
         public bool Remover(EmpresaCliente empresaCliente)
         {

@@ -72,9 +72,10 @@ namespace Benefits.Controllers
         {
             return View();
         }
-        public IActionResult Beneficios()
+        public async Task<IActionResult> Beneficios()
         {
-            return View(_empresaClienteDAO.ListarTodosBeneficiosPorId(1));
+            UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            return View(_empresaClienteDAO.ListarTodosBeneficiosPorEmail(userLogado.Email));
         }
         #endregion
 
@@ -118,14 +119,13 @@ namespace Benefits.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult EmpresaParceria(EmpresaCliente empresaCliente)
+        public async Task<IActionResult> EmpresaParceria(EmpresaCliente empresaCliente)
         {
             try
             {
                 int idEmpresa = Convert.ToInt32(TempData["id"].ToString());
-                empresaCliente.Empresa = _empresaDAO.BuscarPorId(idEmpresa);
-                //TODO: MEU ID... FUNC PARA PEGAR.
-                empresaCliente.Cliente = _clienteDAO.BuscarPorId(1);
+                UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+                empresaCliente.Cliente = _clienteDAO.BuscarPorEmail(userLogado.Email);
                 _empresaClienteDAO.Cadastrar(empresaCliente);
                 return RedirectToAction("empresas");
             }
@@ -136,12 +136,23 @@ namespace Benefits.Controllers
             }
         }
 
-        public IActionResult EmpresaParceriasMinhas()
+        public async Task<IActionResult> EmpresaParceriasMinhas()
         {
-            //todo: int? id
-            //TODO: ALTERAR PARA ListarTodosPorCliente, QUANDO FIZER FUNÇAO DA PESSOA ON.
-            return View(_empresaClienteDAO.ListarTodos());
+            UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            return View(_empresaClienteDAO.ListarMinhasEmpresas(userLogado.Email));
         }
+
+        public IActionResult EmpresaDetails(int? id)
+        {
+            return View(_empresaDAO.BuscarPorId(id));
+        }
+
+        public IActionResult EmpresaClienteDetails(int? id)
+        {
+            return View(_empresaClienteDAO.BuscarPorId(id));
+        }
+
+
 
 
 

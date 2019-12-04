@@ -1,0 +1,29 @@
+﻿@model Domain.EmpresaEmpresa
+
+@{
+    ViewData["Title"] = "EmpresaParceiro";
+}
+
+<h2>EmpresaParceiro</h2>
+
+<h4>EmpresaEmpresa</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EmpresaParceiro">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <h2>Confirmar parceria?</h2>
+
+                <input type="submit" value="Salvar" class="btn btn-info" />
+                <button type="submit" asp-action="Index" asp-controller="Cliente" class="btn btn-warning">Index</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+

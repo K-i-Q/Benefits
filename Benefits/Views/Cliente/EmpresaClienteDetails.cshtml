@@ -1,0 +1,30 @@
+﻿@model Domain.EmpresaCliente
+
+@{
+    ViewData["Title"] = "EmpresaClienteDetails";
+}
+
+<h2>EmpresaClienteDetails</h2>
+
+<div>
+    <h4>EmpresaCliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nivel)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nivel)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContratadaEm)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContratadaEm)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.EmpresaClienteId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

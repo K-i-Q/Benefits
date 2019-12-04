@@ -47,6 +47,18 @@ namespace Repository
             }
         }
 
+        public Cliente BuscarPorEmail(string email)
+        {
+            try
+            {
+                return _context.Clientes.First(x=>x.Email.Equals(email));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool Remover(Cliente cliente)
         {
             try

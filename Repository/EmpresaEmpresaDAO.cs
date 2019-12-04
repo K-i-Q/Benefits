@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Repository
 {
-   public class EmpresaEmpresaDAO : IRepository<EmpresaEmpresa>
+    public class EmpresaEmpresaDAO : IRepository<EmpresaEmpresa>
     {
         private readonly Context _context;
 
@@ -19,7 +20,7 @@ namespace Repository
         {
             try
             {
-                return _context.EmpresaEmpresas.Find(id);
+                return _context.EmpresaEmpresas.Include(x => x.EmpresaUm).Include(x => x.EmpresaDois).FirstOrDefault(x => x.EmpresaEmpresaId == id);
             }
             catch (Exception ex)
             {
@@ -57,7 +58,12 @@ namespace Repository
 
         public List<EmpresaEmpresa> ListarTodos()
         {
-            return _context.EmpresaEmpresas.ToList();
+            return _context.EmpresaEmpresas.Include(x=>x.EmpresaUm).Include(x=>x.EmpresaDois).ToList();
+        }
+
+        public List<EmpresaEmpresa> ListarTodosComEmail(string email)
+        {
+            return _context.EmpresaEmpresas.Include(x => x.EmpresaUm).Include(x => x.EmpresaDois).Where(x=> x.EmpresaUm.Email.Equals(email)).ToList();
         }
 
         public bool Remover(EmpresaEmpresa empresaEmpresa)

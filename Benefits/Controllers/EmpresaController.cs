@@ -174,8 +174,7 @@ namespace Benefits.Controllers
             if (_beneficioDAO.ValidaPorNome(beneficio))
             {
                 UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
-                string email = userLogado.Email;
-                beneficio.Empresa = _empresaDAO.BuscarPorEmail(email);
+                beneficio.Empresa = _empresaDAO.BuscarPorEmail(userLogado.Email);
                 _beneficioDAO.Cadastrar(beneficio);
                 return RedirectToAction("BeneficiosDetails", beneficio);
             }
@@ -204,6 +203,34 @@ namespace Benefits.Controllers
         public IActionResult Empresas()
         {
             return View(_empresaDAO.ListarTodos());
+        }
+
+        public IActionResult EmpresaEmpresaDetails(int? id)
+        {
+            return View(_empresaEmpresaDAO.BuscarPorId(id));
+        }
+
+        public IActionResult EmpresaParceiro(int? id)
+        {
+            TempData["empresaId"] = id;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EmpresaParceiro(EmpresaEmpresa empresaEmpresa)
+        {
+            UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            empresaEmpresa.EmpresaUm = _empresaDAO.BuscarPorEmail(userLogado.Email);
+            empresaEmpresa.EmpresaDois = _empresaDAO.BuscarPorId(Convert.ToInt32(TempData["empresaId"].ToString()));
+            _empresaEmpresaDAO.Cadastrar(empresaEmpresa);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> EmpresaEmpresaParceirosMeu()
+        {
+            //UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            return View(_empresaEmpresaDAO.ListarTodosComEmail(userLogado.Email));
         }
 
         #endregion

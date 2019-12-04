@@ -18,24 +18,30 @@
             <th>
                 @Html.DisplayNameFor(model => model.ContratadaEm)
             </th>
+            <th>
+                Empresa
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nivel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContratadaEm)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EmpresaClienteId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EmpresaClienteId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EmpresaClienteId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nivel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContratadaEm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Empresa.Razao)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EmpresaClienteId">Remover</a> |
+                    <a asp-action="EmpresaClienteDetails" asp-route-id="@item.EmpresaClienteId">Details</a> |
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
