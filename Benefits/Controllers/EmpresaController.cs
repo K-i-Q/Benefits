@@ -233,6 +233,12 @@ namespace Benefits.Controllers
             return View(_empresaEmpresaDAO.ListarTodosComEmail(userLogado.Email));
         }
 
+        public IActionResult EmpresaBeneficiosParceiro(int? id)
+        {
+            return View(_beneficioDAO.ListarTodosEmpresaId(id));
+        }
+
+
         #endregion
     }
 }

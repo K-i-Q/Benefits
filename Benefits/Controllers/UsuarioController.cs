@@ -28,7 +28,11 @@ namespace Benefits.Controllers
         {
             return View();
         }
-
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Home", "Home");
+        }
         [HttpPost]
         public async Task<IActionResult> Login(Usuario usuario)
         {

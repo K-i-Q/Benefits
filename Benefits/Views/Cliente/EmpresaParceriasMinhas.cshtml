@@ -38,9 +38,9 @@
                     @Html.DisplayFor(modelItem => item.Empresa.Razao)
                 </td>
                 <td>
-                    <a asp-action="EmpresaRemoverParceria" asp-route-id="@item.EmpresaClienteId">Remover</a> |
-                    <a asp-action="EmpresaClienteDetails" asp-route-id="@item.EmpresaClienteId">Details</a> |
-                    <a asp-action="EmpresaBeneficios" asp-route-id="@item.EmpresaClienteId">Beneficios</a>
+                    <a asp-action="EmpresaRemoverParceria" asp-route-id="@item.EmpresaClienteId" class="btn btn-info">Remover</a> |
+                    <a asp-action="EmpresaClienteDetails" asp-route-id="@item.EmpresaClienteId" class="btn btn-info">Details</a> |
+                    <a asp-action="EmpresaBeneficios" asp-route-id="@item.EmpresaClienteId" class="btn btn-dark" >Beneficios</a>
                 </td>
             </tr>
         }

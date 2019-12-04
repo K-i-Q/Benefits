@@ -23,9 +23,10 @@
         <dd>
             @Html.DisplayFor(model => model.EmpresaUm.Razao)
         </dd>
+
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.EmpresaEmpresaId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.EmpresaEmpresaId"class="btn btn-info">Edit</a> |
+    <a asp-action="Index"class="btn btn-info">Back to List</a>
 </div>

@@ -27,7 +27,6 @@ namespace Repository
                 throw ex;
             }
         }
-
         public bool ValidaPorNome(Beneficio beneficio)
         {
             try
@@ -81,9 +80,13 @@ namespace Repository
         {
             return _context.Beneficios.ToList();
         }
+        public List<Beneficio> ListarTodosEmpresaId(int? id)
+        {
+            return _context.Beneficios.Include(x=>x.Empresa).Where(x => x.Empresa.EmpresaId == id).ToList();
+        }
         public List<Beneficio> ListarBeneficiosEmpresa(string email)
         {
-            return _context.Beneficios.Where(x=>x.Empresa.Email.Equals(email)).ToList();
+            return _context.Beneficios.Where(x => x.Empresa.Email.Equals(email)).ToList();
         }
 
 
