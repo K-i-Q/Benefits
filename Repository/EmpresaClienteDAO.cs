@@ -27,6 +27,22 @@ namespace Repository
             }
         }
 
+        public bool RemoverClienteEmailEEmpresaId(string email, int? id )
+        {
+            try
+            {
+                EmpresaCliente e = _context.EmpresaClientes.FirstOrDefault(x => x.Cliente.Email.Equals(email) && x.Empresa.EmpresaId == id);
+                Remover(e);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+
+            return false;
+        }
         public bool Cadastrar(EmpresaCliente empresaCliente)
         {
             try
@@ -63,7 +79,7 @@ namespace Repository
 
         public List<EmpresaCliente> ListarMinhasEmpresas(string email)
         {
-            return _context.EmpresaClientes.Where(x=>x.Cliente.Email.Equals(email)).Include(x => x.Empresa).ToList();
+            return _context.EmpresaClientes.Include(x => x.Empresa).Where(x=>x.Cliente.Email.Equals(email)).ToList();
         }
 
         //TODO: VER SE É ID OU OBJETO
@@ -76,7 +92,7 @@ namespace Repository
         //A FAZER ESSA FUNÇAO
         public List<EmpresaCliente> ListarTodosBeneficiosPorEmail(string email)
         {
-            return _context.EmpresaClientes.Where(x=>x.Cliente.Email.Equals(email)).ToList();
+            return _context.EmpresaClientes.Include(x => x.Empresa).Include(x => x.Empresa.Beneficios).Where(x => x.Cliente.Email.Equals(email)).ToList();
         }
         //===============================================================================================
 

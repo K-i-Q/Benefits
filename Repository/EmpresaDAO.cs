@@ -54,7 +54,7 @@ namespace Repository
         {
             try
             {
-                return _context.Empresas.Find(id);
+                return _context.Empresas.Include(x => x.Beneficios).Include(x => x.Endereco).FirstOrDefault(x => x.EmpresaId == id);
             }
             catch (Exception ex)
             {

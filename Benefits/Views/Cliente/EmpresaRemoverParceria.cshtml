@@ -1,13 +1,14 @@
 ﻿@model Domain.EmpresaCliente
 
 @{
-    ViewData["Title"] = "EmpresaClienteDetails";
+    ViewData["Title"] = "EmpresaRemoverParceria";
 }
 
-<h2>EmpresaClienteDetails</h2>
+<h2>Remover parceria</h2>
 
+<h3>Quer Realmente se desvincular?</h3>
 <div>
-    <h4>EmpresaCliente</h4>
+    <h4>Empresa Cliente</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -22,15 +23,11 @@
         <dd>
             @Html.DisplayFor(model => model.ContratadaEm)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Empresa.Razao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Empresa.Razao)
-        </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.EmpresaClienteId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    
+    <form asp-action="EmpresaRemoverParceria">
+        <input type="hidden" asp-for="EmpresaClienteId"/>
+        <input type="submit" value="Delete" class="btn btn-warning" /> |
+        <a asp-action="Index" class="btn btn-info">Back to List</a>
+    </form>
 </div>

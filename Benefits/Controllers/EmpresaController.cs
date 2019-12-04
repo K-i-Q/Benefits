@@ -33,9 +33,10 @@ namespace Benefits.Controllers
             _signInManager = signInManager;
         }
         #region Navigation Views Crud
-        public IActionResult Index(Empresa empresa)
+        public async Task<IActionResult> Index()
         {
-            return View(empresa);
+            UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            return View(_empresaDAO.BuscarPorEmail(userLogado.Email));
         }
         public IActionResult Cadastrar()
         {
@@ -228,7 +229,6 @@ namespace Benefits.Controllers
 
         public async Task<IActionResult> EmpresaEmpresaParceirosMeu()
         {
-            //UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
             UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
             return View(_empresaEmpresaDAO.ListarTodosComEmail(userLogado.Email));
         }

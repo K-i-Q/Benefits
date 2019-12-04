@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,11 @@ namespace Repository
         public List<Cliente> ListarTodos()
         {
             return _context.Clientes.ToList();
+        }
+
+        public List<Beneficio> RetornarBeneficiosDeEmpresaId(int? id)
+        {
+            return _context.Beneficios.Include(x => x.Empresa).Where(x => x.Empresa.EmpresaId == id).ToList();
         }
 
         public Cliente BuscarPorId(int? id)

@@ -30,9 +30,10 @@ namespace Benefits.Controllers
         }
 
         #region Navigation Views Crud
-        public IActionResult Index(Cliente cliente)
+        public async Task<IActionResult> Index(Cliente cliente)
         {
-            return View(cliente);
+            UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            return View(_clienteDAO.BuscarPorEmail(userLogado.Email));
         }
         public IActionResult Cadastrar()
         {
@@ -140,6 +141,27 @@ namespace Benefits.Controllers
         {
             UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
             return View(_empresaClienteDAO.ListarMinhasEmpresas(userLogado.Email));
+        }
+
+        public IActionResult EmpresaRemoverParceria(int? id)
+        {
+            TempData["id"] = id;
+            return View();
+        }
+
+        // TESTAR FUNÇAO =-==========================================
+        [HttpPost]
+        public async Task<IActionResult> EmpresaRemoverParceria()
+        {
+
+            UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            _empresaClienteDAO.RemoverClienteEmailEEmpresaId(userLogado.Email, Convert.ToInt32(TempData["id"].ToString()));
+            return RedirectToAction("index");
+        }
+
+        public IActionResult EmpresaBeneficios(int? id)
+        {
+            return View(_clienteDAO.RetornarBeneficiosDeEmpresaId(id));
         }
 
         public IActionResult EmpresaDetails(int? id)

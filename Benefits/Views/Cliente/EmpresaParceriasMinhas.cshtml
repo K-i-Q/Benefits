@@ -7,7 +7,7 @@
 <h2>EmpresaParceriasMinhas</h2>
 
 <p>
-    <a asp-action="Index">Index</a>
+    <a asp-action="Index" class="btn btn-info">Index</a>
 </p>
 <table class="table">
     <thead>
@@ -38,8 +38,9 @@
                     @Html.DisplayFor(modelItem => item.Empresa.Razao)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.EmpresaClienteId">Remover</a> |
+                    <a asp-action="EmpresaRemoverParceria" asp-route-id="@item.EmpresaClienteId">Remover</a> |
                     <a asp-action="EmpresaClienteDetails" asp-route-id="@item.EmpresaClienteId">Details</a> |
+                    <a asp-action="EmpresaBeneficios" asp-route-id="@item.EmpresaClienteId">Beneficios</a>
                 </td>
             </tr>
         }
