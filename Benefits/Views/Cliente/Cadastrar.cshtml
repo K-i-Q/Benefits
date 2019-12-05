@@ -1,12 +1,12 @@
 @model Domain.Cliente
 
-<div class="container-fluid">
+<div class="container-fluid bg-success text-white rounded">
     <div class="col-md-12">
         <hr />
         <div class="row">
             <div class="col-md-12">
                 <form method="post">
-                    <fieldset class="float-left m-2">
+                    <fieldset class="d-flex justify-content-center">
                         <legend>Cadastrar Cliente</legend>
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
@@ -26,18 +26,16 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Senha: </label>
-                            <input id="idSenha" name="Senha" placeholder="Senha: " class="form-control" />
+                            <input id="idSenha" name="Senha" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label class="control-label">Confirmacao Senha: </label>
-                            <input id="idConfirmacaoSenha" name="ConfirmacaoSenha" placeholder="Confirmacao Senha: " class="form-control" />
+                            <input id="idConfirmacaoSenha" name="ConfirmacaoSenha" class="form-control" />
                         </div>
-                        <div class="form-group">
-                            <input type="submit" value="Cadastrar" class="btn btn-block btn-primary" />
-                            <a class="btn btn-block btn-outline-warning" asp-controller="Home" asp-action="Home">Voltar</a>
-                        </div>
+
+
                     </fieldset>
-                    <fieldset class="float-left m-1">
+                    <fieldset class="d-flex justify-content-center">
                         </br>
                         </br>
                         <div class="form-group">
@@ -67,7 +65,12 @@
                             <input type="text" asp-for="Endereco.State" class="form-control" readonly="" />
                         </div>
                     </fieldset>
-
+                    <div class="form-group">
+                        <input type="submit" value="Cadastrar" class="btn btn-block btn-info" />
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-block btn-warning" asp-controller="Home" asp-action="Home">Voltar</a>
+                    </div>
                 </form>
             </div>
         </div>

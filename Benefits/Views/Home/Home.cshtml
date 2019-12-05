@@ -3,10 +3,13 @@
     ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
-
-<Legend>Home</Legend>
+<div class="d-flex justify-content-center bg-danger p-4">
+    <h2 class="text-white">Home</h2>
+</div>
 <form action="/" method="get">
-    <button type="submit" asp-action="Cadastrar" asp-controller="Empresa" class="btn btn-info">Cadastro Empresa</button>
-    <button type="submit" asp-action="Cadastrar" asp-controller="Cliente" class="btn btn-success">Cadastro Cliente</button>
-    <button type="submit" asp-action="Login" asp-controller="Usuario" class="btn btn-warning">Login</button>
+    <div class="d-flex justify-content-around m-4">
+        <button type="submit" asp-action="Cadastrar" asp-controller="Empresa" class="btn p-3 btn-info">Cadastro Empresa</button>
+        <button type="submit" asp-action="Login" asp-controller="Usuario" class="btn  p-3 btn-warning">Login</button>
+        <button type="submit" asp-action="Cadastrar" asp-controller="Cliente" class="btn  p-3 btn-success">Cadastro Cliente</button>
+    </div>
 </form>

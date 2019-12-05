@@ -278,5 +278,18 @@ namespace Benefits.Controllers
         }
 
         #endregion
+
+        #region CLIENTES
+
+        public async Task<IActionResult> ClientesAssociado()
+        {
+            UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            Empresa e = _empresaDAO.BuscarPorEmail(userLogado.Email);
+
+            return View(_empresaClienteDAO.ClientesAssociado(e.EmpresaId));
+        }
+
+
+        #endregion
     }
 }
