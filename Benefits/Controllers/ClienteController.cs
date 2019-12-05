@@ -11,7 +11,7 @@ namespace Benefits.Controllers
 {
     public class ClienteController : Controller
     {
-
+        private readonly BeneficioDAO _beneficioDAO;
         private readonly EmpresaClienteDAO _empresaClienteDAO;
         private readonly ClienteDAO _clienteDAO;
         private readonly EmpresaDAO _empresaDAO;
@@ -19,8 +19,9 @@ namespace Benefits.Controllers
         private readonly UserManager<UsuarioLogado> _userManager;
         private readonly SignInManager<UsuarioLogado> _signInManager;
 
-        public ClienteController(EmpresaClienteDAO empresaClienteDAO, EmpresaDAO empresaDAO, ClienteDAO clienteDAO, UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
+        public ClienteController(BeneficioDAO beneficioDAO ,EmpresaClienteDAO empresaClienteDAO, EmpresaDAO empresaDAO, ClienteDAO clienteDAO, UsuarioDAO usuarioDAO, UserManager<UsuarioLogado> userManager, SignInManager<UsuarioLogado> signInManager)
         {
+            _beneficioDAO = beneficioDAO;
             _empresaClienteDAO = empresaClienteDAO;
             _empresaDAO = empresaDAO;
             _clienteDAO = clienteDAO;
@@ -155,7 +156,7 @@ namespace Benefits.Controllers
         {
 
             UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
-            _empresaClienteDAO.RemoverClienteEmailEEmpresaId(userLogado.Email, Convert.ToInt32(TempData["id"].ToString()));
+            _empresaClienteDAO.Remover(_empresaClienteDAO.BuscarPorId(Convert.ToInt32(TempData["id"].ToString())));
             return RedirectToAction("index");
         }
 
@@ -254,6 +255,11 @@ namespace Benefits.Controllers
             }
         }
 
+        public IActionResult BeneficiosTodasEmpresas(int? id)
+        {
+
+            return View(_beneficioDAO.BeneficiosTodasEmpresas(id));
+        }
 
     }
 

@@ -40,7 +40,8 @@
                 <td>
                     <a asp-action="EmpresaRemoverParceria" asp-route-id="@item.EmpresaClienteId" class="btn btn-info">Remover</a> |
                     <a asp-action="EmpresaClienteDetails" asp-route-id="@item.EmpresaClienteId" class="btn btn-info">Details</a> |
-                    <a asp-action="EmpresaBeneficios" asp-route-id="@item.EmpresaClienteId" class="btn btn-dark" >Beneficios</a>
+                    <a asp-action="EmpresaBeneficios" asp-route-id="@item.EmpresaClienteId" class="btn btn-dark">Beneficios</a> |
+                    <a asp-action="BeneficiosTodasEmpresas" asp-route-id="@item.EmpresaClienteId" class="btn btn-dark">Todos Beneficios</a>
                 </td>
             </tr>
         }

@@ -82,7 +82,7 @@ namespace Repository
         }
         public List<Beneficio> ListarTodosEmpresaId(int? id)
         {
-            return _context.Beneficios.Include(x=>x.Empresa).Where(x => x.Empresa.EmpresaId == id).ToList();
+            return _context.Beneficios.Include(x => x.Empresa).Where(x => x.Empresa.EmpresaId == id).ToList();
         }
         public List<Beneficio> ListarBeneficiosEmpresa(string email)
         {
@@ -124,5 +124,39 @@ namespace Repository
                 throw ex;
             }
         }
+
+        public List<Beneficio> BeneficiosTodasEmpresas(int? id)
+        {
+            //1
+            //PEGAR TODOS ID DAS PARCEIRAS DA EMPRESA SELECIODA POR ID
+            List<Beneficio> beneficiosGeral = new List<Beneficio>();
+            List<int> idList = new List<int>();
+            idList.Add(Convert.ToInt32(id));
+            List<EmpresaEmpresa> recuperarTodos = _context.EmpresaEmpresas.Include(x=>x.EmpresaDois).Include(x=>x.EmpresaUm).ToList();
+            int counttodos = _context.EmpresaEmpresas.Count();
+
+            foreach (EmpresaEmpresa i in recuperarTodos)
+            {
+                if (id == i.EmpresaUm.EmpresaId)
+                {
+                    idList.Add(i.EmpresaDois.EmpresaId);
+                }
+            }
+            //2
+            //PERCORRE A LISTA DE ID E PERCORRE A LISTA DE BENEFICIOS COM ID DA LISTA, E ADD NA LISTA DE BENE NOVO.
+            foreach (int i in idList)
+            {
+                foreach (Beneficio x in _context.Beneficios)
+                {
+                    if (i == x.Empresa.EmpresaId)
+                    {
+                        beneficiosGeral.Add(x);
+                    }
+                }
+            }
+
+            return beneficiosGeral;
+        }
+
     }
 }

@@ -263,6 +263,13 @@ namespace Benefits.Controllers
             return RedirectToAction("EmpresaEmpresaParceirosMeu");
         }
 
+        public IActionResult BeneficiosTodasEmpresas(int? id)
+        {
+
+            return View(_beneficioDAO.BeneficiosTodasEmpresas(id));
+        }
+
+
         #endregion
     }
 }

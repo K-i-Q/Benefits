@@ -79,7 +79,7 @@ namespace Repository
 
         public List<EmpresaCliente> ListarMinhasEmpresas(string email)
         {
-            return _context.EmpresaClientes.Include(x => x.Empresa).Where(x=>x.Cliente.Email.Equals(email)).ToList();
+            return _context.EmpresaClientes.Include(x => x.Cliente).Include(x=>x.Empresa).Where(x=>x.Cliente.Email.Equals(email)).ToList();
         }
 
         //TODO: VER SE É ID OU OBJETO
