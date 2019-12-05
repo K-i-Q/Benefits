@@ -250,6 +250,18 @@ namespace Benefits.Controllers
             return View(_beneficioDAO.ListarTodosEmpresaId(id));
         }
 
+        public IActionResult EmpresaRemoverParceiro(int? id)
+        {
+            TempData["id"] = id;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EmpresaRemoverParceiro()
+        {
+            _empresaEmpresaDAO.Remover(_empresaEmpresaDAO.BuscarPorId(Convert.ToInt32(TempData["id"].ToString())));
+            return RedirectToAction("EmpresaEmpresaParceirosMeu");
+        }
 
         #endregion
     }

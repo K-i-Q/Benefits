@@ -1,0 +1,27 @@
+﻿@model Domain.EmpresaEmpresa
+
+@{
+    ViewData["Title"] = "EmpresaRemoverParceiro";
+}
+
+<h2>EmpresaRemoverParceiro</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>EmpresaEmpresa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CriadoEm)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CriadoEm)
+        </dd>
+    </dl>
+    
+    <form asp-action="EmpresaRemoverParceiro">
+        <input type="hidden" asp-for="EmpresaEmpresaId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-dark">Index</a>
+    </form>
+</div>
