@@ -5,43 +5,43 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<div class="row">
+<div class="row d-flex justify-content-center bg-danger p-5 rounded-pill">
     <div class="col-md-4">
         <form asp-action="Cadastrar" method="post">
             <fieldset>
-                <legend>Cadastrar Empresa</legend>
+                <legend class="text-white">Cadastrar Empresa</legend>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label asp-for="Cnpj" class="control-label"></label>
                     <input asp-for="Cnpj" class="form-control" />
                     <span asp-validation-for="Cnpj" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label asp-for="Razao" class="control-label"></label>
                     <input asp-for="Razao" class="form-control" />
                     <span asp-validation-for="Razao" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label asp-for="Email" class="control-label"></label>
                     <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label class="control-label">Senha: </label>
-                    <input id="idSenha" name="Senha" placeholder="Senha: " class="form-control" />
+                    <input id="idSenha" name="Senha"  class="form-control" />
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label class="control-label">Confirmacao Senha: </label>
-                    <input id="idConfirmacaoSenha" name="ConfirmacaoSenha" placeholder="Confirmacao Senha: " class="form-control" />
+                    <input id="idConfirmacaoSenha" name="ConfirmacaoSenha" class="form-control" />
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label asp-for="Telefone" class="control-label"></label>
                     <input asp-for="Telefone" class="form-control" />
                     <span asp-validation-for="Telefone" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Cadastrar" class="btn btn-block btn-primary" />
-                    <a class="btn btn-block btn-outline-warning" asp-controller="Home" asp-action="Home">Voltar</a>
+                    <input type="submit" value="Cadastrar" class="btn btn-block btn-info" />
+                    <a class="btn btn-block btn-warning" asp-controller="Home" asp-action="Home">Voltar</a>
                 </div>
             </fieldset>
         </form>

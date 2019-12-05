@@ -4,40 +4,42 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
 }
-<h2>Index</h2>
+<div class="row">
+    <div class="col-md-4">
+        <fieldset>
+            <legend>Index</legend>
+            <form asp-action="">
+                <div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ClienteId" />
+                    <hr />
+                    <div class="form-group">
+                        <label asp-for="Nome" class="control-label"></label>
+                        <input readonly asp-for="Nome" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input readonly asp-for="Email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Telefone" class="control-label"></label>
+                        <input readonly asp-for="Telefone" class="form-control" />
+                    </div>
+                  
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CadastradoEm)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CadastradoEm)
+                    </dd>
+                    </dl>
+                </div>
 
-<div>
-    <h4>Cliente</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CadastradoEm)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CadastradoEm)
-        </dd>
-    </dl>
-</div>
+                <div class="form-group">
+                    <input type="submit" value="Editar" asp-route-id="@Model.ClienteId" class="btn btn-block btn-primary" asp-controller="Cliente" asp-action="Editar"/>
 
-<div class="form-group">
-    <input type="submit" value="Editar" asp-route-id="@Model.ClienteId" class="btn btn-block btn-primary" />
-    <a class="btn btn-block btn-outline-warning" asp-controller="Home" asp-action="Index">Voltar</a>
+                </div>
+            </form>
+        </fieldset>
+    </div>
 </div>
