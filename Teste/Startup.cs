@@ -5,14 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Repository;
 
-namespace API
+namespace Teste
 {
     public class Startup
     {
@@ -26,17 +24,6 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            //Configurar a ID do banco - Context
-            services.AddDbContext<Context>
-                (options => options.UseSqlServer(
-                    Configuration.GetConnectionString("BenefitsConnection")));
-
-            //Configurar a ID dos DAOs
-            services.AddScoped<BeneficioDAO>();
-            services.AddScoped<ClienteDAO>();
-            services.AddScoped<EmpresaDAO>();
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

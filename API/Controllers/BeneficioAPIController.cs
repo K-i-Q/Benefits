@@ -14,17 +14,21 @@ namespace API.Controllers
     [ApiController]
     public class BeneficioAPIController : ControllerBase
     {
+        private readonly EmpresaDAO _empresaDAO;
+        private readonly ClienteDAO _clienteDAO;
         private readonly BeneficioDAO _beneficioDAO;
-        public BeneficioAPIController(BeneficioDAO beneficioDAO)
+        public BeneficioAPIController(ClienteDAO clienteDAO, EmpresaDAO empresaDAO,BeneficioDAO beneficioDAO)
         {
+            _clienteDAO = clienteDAO;
+            _empresaDAO = empresaDAO;
             _beneficioDAO = beneficioDAO;
         }
 
         //GET: /api/Beneficio/ListarTodos
-        [HttpGet]
+        [HttpGet("listarbeneficios")]
         public IActionResult ListarTodos()
         {
-            return Ok(_beneficioDAO.ListarTodos());
+            return Ok(_beneficioDAO.ListarTodosComEmpresa());
         }
 
         //GET: /api/Beneficio/BuscarPorId/2
@@ -38,6 +42,18 @@ namespace API.Controllers
                 return Ok(p);
             }
             return NotFound(new { msg = "Beneficio não encontrado!" });
+        }
+
+        [HttpGet("listarempresas")]
+        public IActionResult ListartodasEmpresas()
+        {
+            return Ok(_empresaDAO.ListarTodos());
+        }
+
+        [HttpGet("listarclientes")]
+        public IActionResult ListarTodosClientes()
+        {
+            return Ok(_clienteDAO.ListarTodos());
         }
 
         //[HttpPost]

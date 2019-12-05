@@ -80,6 +80,10 @@ namespace Repository
         {
             return _context.Beneficios.ToList();
         }
+        public List<Beneficio> ListarTodosComEmpresa()
+        {
+            return _context.Beneficios.ToList();
+        }
         public List<Beneficio> ListarTodosEmpresaId(int? id)
         {
             return _context.Beneficios.Include(x => x.Empresa).Where(x => x.Empresa.EmpresaId == id).ToList();
@@ -132,7 +136,7 @@ namespace Repository
             List<Beneficio> beneficiosGeral = new List<Beneficio>();
             List<int> idList = new List<int>();
             idList.Add(Convert.ToInt32(id));
-            List<EmpresaEmpresa> recuperarTodos = _context.EmpresaEmpresas.Include(x=>x.EmpresaDois).Include(x=>x.EmpresaUm).ToList();
+            List<EmpresaEmpresa> recuperarTodos = _context.EmpresaEmpresas.Include(x => x.EmpresaDois).Include(x => x.EmpresaUm).ToList();
             int counttodos = _context.EmpresaEmpresas.Count();
 
             foreach (EmpresaEmpresa i in recuperarTodos)
