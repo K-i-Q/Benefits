@@ -1,10 +1,8 @@
 ﻿@model Domain.Cliente
-<h2>Editar</h2>
-
-<h4>Cliente</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
+        <legend>Editar Cliente</legend>
         <form asp-action="Editar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ClienteId" />
@@ -27,11 +25,12 @@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-danger" />
             </div>
+
+            <div class="form-group">
+                <input type="submit" value="Editar" class="btn btn-block btn-primary" />
+                <a class="btn btn-block btn-outline-warning" asp-controller="Home" asp-action="Home">Voltar</a>
+            </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index" class="btn btn-info">Back to List</a>
 </div>
 

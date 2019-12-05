@@ -27,7 +27,8 @@ namespace Repository
             }
         }
 
-        public bool RemoverClienteEmailEEmpresaId(string email, int? id )
+
+        public bool RemoverClienteEmailEEmpresaId(string email, int? id)
         {
             try
             {
@@ -57,7 +58,7 @@ namespace Repository
             }
         }
 
-        
+
         public bool Editar(EmpresaCliente empresaCliente)
         {
             try
@@ -76,10 +77,36 @@ namespace Repository
         {
             return _context.EmpresaClientes.ToList();
         }
+        public List<Cliente> ClientesAssociado(int? id)
+        {
+            List<int> idClientes = new List<int>();
+            List<Cliente> clientesList = new List<Cliente>();
+
+            foreach (EmpresaCliente i in _context.EmpresaClientes.Include(x=>x.Cliente))
+            {
+                if (id == i.Cliente.ClienteId)
+                {
+                    idClientes.Add(i.Cliente.ClienteId);
+                }
+            }
+
+            foreach (var item in idClientes)
+            {
+                foreach (Cliente i in _context.Clientes)
+                {
+                    if (i.ClienteId == item)
+                    {
+                        clientesList.Add(i);
+                    }
+                }
+            }
+
+            return clientesList;
+        }
 
         public List<EmpresaCliente> ListarMinhasEmpresas(string email)
         {
-            return _context.EmpresaClientes.Include(x => x.Cliente).Include(x=>x.Empresa).Where(x=>x.Cliente.Email.Equals(email)).ToList();
+            return _context.EmpresaClientes.Include(x => x.Cliente).Include(x => x.Empresa).Where(x => x.Cliente.Email.Equals(email)).ToList();
         }
 
         //TODO: VER SE É ID OU OBJETO

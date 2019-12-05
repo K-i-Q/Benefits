@@ -62,6 +62,7 @@ namespace Repository
             }
         }
 
+
         public bool Remover(Empresa empresa)
         {
             try
