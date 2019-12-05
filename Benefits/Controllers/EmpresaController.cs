@@ -269,6 +269,13 @@ namespace Benefits.Controllers
             return View(_beneficioDAO.BeneficiosTodasEmpresas(id));
         }
 
+        public async Task<IActionResult> BeneficiosTodos()
+        {
+            UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
+            var e = _empresaDAO.BuscarPorEmail(userLogado.Email);
+            return View(_beneficioDAO.BeneficiosTodasEmpresas(e.EmpresaId));
+
+        }
 
         #endregion
     }
