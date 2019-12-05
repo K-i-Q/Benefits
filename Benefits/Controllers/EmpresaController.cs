@@ -190,11 +190,23 @@ namespace Benefits.Controllers
         public IActionResult BeneficiosEdit(Beneficio beneficio)
         {
             _beneficioDAO.Editar(beneficio);
-            return RedirectToAction("BeneficiosView", beneficio);
+            return RedirectToAction("Beneficios");
         }
         public IActionResult BeneficiosDetails(Beneficio beneficio)
         {
             return View(beneficio);
+        }
+        public IActionResult BeneficiosDelete(int? id)
+        {
+            TempData["id"] = id;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult BeneficiosDelete()
+        {
+            _beneficioDAO.Remover(_beneficioDAO.BuscarPorId(Convert.ToInt32(TempData["id"].ToString())));
+            return RedirectToAction("Empresas");
         }
 
         #endregion

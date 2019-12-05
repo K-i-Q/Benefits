@@ -110,6 +110,8 @@ namespace Repository
             }
         }
 
+
+
         public Beneficio ListarBeneficioPorEmpresa(int? id)
         {
             try
