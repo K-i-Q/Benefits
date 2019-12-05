@@ -36,7 +36,8 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Editar" asp-route-id="@Model.ClienteId" class="btn btn-info">Edit</a> |
-    <a asp-action="Index" class="btn btn-info">Back to List</a>
+
+<div class="form-group">
+    <input type="submit" value="Editar" asp-route-id="@Model.ClienteId" class="btn btn-block btn-primary" />
+    <a class="btn btn-block btn-outline-warning" asp-controller="Home" asp-action="Index">Voltar</a>
 </div>
