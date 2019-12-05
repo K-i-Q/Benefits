@@ -4,28 +4,28 @@
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
-
-<h2>Login</h2>
-<h4>Usuario</h4>
-<hr />
-<hr />
-<div class="row">
+<div class="row d-flex justify-content-center p-3">
+<h2 class="text-black">Login</h2>
+</div>
+<div class="row d-flex justify-content-center p-4 bg-info rounded-circle">
     <div class="col-md-4">
         <form asp-action="Login" asp-controller="Usuario" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group text-white">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group text-white">
                 <label asp-for="Senha" class="control-label"></label>
                 <input asp-for="Senha" class="form-control" />
                 <span asp-validation-for="Senha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Acessar" class="btn btn-success" />
-                <a asp-action="Home" asp-controller="Home" value="Voltar" class="btn btn-warning" >Voltar</a>
+                <input type="submit" value="Acessar" class="btn btn-block btn-success" />
+            </div>
+            <div class="form-group">
+                <a asp-action="Home" asp-controller="Home" value="Voltar" class="btn btn-block btn-warning">Voltar</a>
             </div>
         </form>
     </div>
