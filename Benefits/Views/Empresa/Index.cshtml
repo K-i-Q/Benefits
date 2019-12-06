@@ -4,22 +4,17 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_EmpresaLayout.cshtml";
 }
+<div class="container-fluid d-flex justify-content-center">
+    <h2>@Html.DisplayFor(model => model.Razao)</h2>
+</div>
 
-<legend>Index Empresa</legend>
-
-<div>
+<div class="container-fluid d-flex justify-content-center text-white p-3 bg-success rounded">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Cnpj)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Cnpj)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Razao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Razao)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Email)
@@ -41,7 +36,6 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a class="btn btn-info" asp-action="Editar" asp-controller="Empresa" asp-route-id="@Model.EmpresaId">Editar</a> |
-    <a class="btn btn-info" asp-action="Index">Back to List</a>
+<div class="form-group d-flex justify-content-around m-4">
+    <a class="p-3 btn btn-block btn-danger" asp-action="Editar" asp-controller="Empresa" asp-route-id="@Model.EmpresaId">Editar</a>
 </div>

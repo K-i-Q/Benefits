@@ -4,40 +4,33 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_ClienteLayout.cshtml";
 }
-<h2>Index</h2>
+<div class="container-fluid d-flex justify-content-center text-white p-4">
+    <h4>@Html.DisplayFor(model => model.Nome)</h4>
+ </div>
+    <div class="container-fluid d-flex justify-content-center bg-danger rounded-pill text-white p-4">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Telefone)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CadastradoEm)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CadastradoEm)
+            </dd>
+        </dl>
+    </div>
 
-<div>
-    <h4>Cliente</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CadastradoEm)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CadastradoEm)
-        </dd>
-    </dl>
-</div>
-
-<div class="form-group">
-    <input type="submit" value="Editar" asp-route-id="@Model.ClienteId" class="btn btn-block btn-primary" />
-    <a class="btn btn-block btn-outline-warning" asp-controller="Home" asp-action="Index">Voltar</a>
-</div>
+    <div class="form-group d-flex justify-content-around m-4">
+        <input type="submit" value="Editar" asp-route-id="@Model.ClienteId" class="p-4 btn btn-info" />
+        <a class="btn btn-warning p-4" asp-controller="Home" asp-action="Index">Voltar</a>
+    </div>
