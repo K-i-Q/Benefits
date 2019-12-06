@@ -3,54 +3,54 @@
 @{
     ViewData["Title"] = "Empresas";
 }
-
-<h2>Empresas</h2>
-
-<p>
-    <a asp-action="Index" class="btn btn-dark">Index</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cnpj)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Razao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefone)
-            </th>
-            <th>
-                Contratar
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="m-2 container-fluid d-flex justify-content-center p-4 rounded bg-danger">
+    <h2 class="text-white">Empresas</h2>
+</div>
+    <div class="d-flex justify-content-center m-4">
+        <a asp-action="Index" class="btn btn-block btn-info p-3">Início</a>
+    </div>
+    <table class="table table-dark table-bordered table-striped">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cnpj)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Razao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telefone)
-                </td>
-                <td>
-                    <a asp-action="EmpresaParceiro" asp-route-id="@item.EmpresaId"class="btn btn-dark">Adicionar</a>
-
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cnpj)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Razao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </th>
+                <th>
+                    Contratar
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cnpj)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Razao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefone)
+                    </td>
+                    <td>
+                        <a asp-action="EmpresaParceiro" asp-route-id="@item.EmpresaId" class="btn btn-block btn-warning">Adicionar</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
