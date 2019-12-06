@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191205225608_CriarBanco")]
-    partial class CriarBanco
+    [Migration("20191206004718_dsji")]
+    partial class dsji
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
