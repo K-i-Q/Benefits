@@ -3,19 +3,15 @@
 @{
     ViewData["Title"] = "BeneficiosDetails";
 }
+<div class="m-2 container-fluid d-flex justify-content-center p-4 rounded bg-success">
+    <h2 class="text-white">Detalhes do benefício</h2>
+</div>
 
-<h2>BeneficiosDetails</h2>
-
-<div>
-    <h4>Beneficio</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+<div class="container-fluid d-flex justify-content-center m-4">
+    <h4>@Html.DisplayFor(model => model.Nome)</h4>
+</div>
+<div class="container-fluid d-flex justify-content-center">
+    <dl class="dl-horizontal text-white bg-danger p-4 rounded">
         <dt>
             @Html.DisplayNameFor(model => model.Nivel)
         </dt>
@@ -37,6 +33,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="BeneficiosEdit" asp-route-id="@Model.BeneficioId">Edit</a> |
-    <a asp-action="Beneficios">Back to List</a>
+    <a class="btn btn-block btn-success"  asp-action="BeneficiosEdit" asp-route-id="@Model.BeneficioId">Editar</a>
+    <a class="btn btn-block btn-warning" asp-action="Beneficios">Voltar</a>
 </div>

@@ -192,9 +192,9 @@ namespace Benefits.Controllers
             _beneficioDAO.Editar(beneficio);
             return RedirectToAction("Beneficios");
         }
-        public IActionResult BeneficiosDetails(Beneficio beneficio)
+        public IActionResult BeneficiosDetails(int? id)
         {
-            return View(beneficio);
+            return View(_beneficioDAO.BuscarPorId(id));
         }
         public IActionResult BeneficiosDelete(int? id)
         {
