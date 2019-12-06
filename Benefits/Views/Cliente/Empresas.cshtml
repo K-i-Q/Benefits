@@ -3,11 +3,13 @@
 @{
     ViewData["Title"] = "Empresas";
 }
-
-<h2>Empresas</h2>
-
-    <a class="btn btn-info" asp-controller="Cliente" asp-action="Index">Index</a>
-<table class="table">
+<div class="container-fluid d-flex justify-content-center bg-info p-4 m-4 rounded-pill">
+    <h2 class=" text-white">Empresas</h2>
+</div>
+<div class="container-fluid d-flex justify-content-center m-3">
+    <a class="btn btn-success p-4" asp-controller="Cliente" asp-action="Index">Index</a>
+</div>
+<table class="table table-striped table-dark">
     <thead>
         <tr>
             <th>
@@ -40,8 +42,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Telefone)
             </td>
-            <td>
-                <a asp-action="EmpresaParceria" asp-route-id="@item.EmpresaId" class="btn btn-dark">Adicionar</a> |
+            <td class="d-flex justify-content-between">
+                <a asp-action="EmpresaParceria" asp-route-id="@item.EmpresaId" class="btn btn-primary">Adicionar</a>
                 <a asp-action="EmpresaDetails" asp-route-id="@item.EmpresaId" class="btn btn-info">Detalhes</a>
             </td>
         </tr>
