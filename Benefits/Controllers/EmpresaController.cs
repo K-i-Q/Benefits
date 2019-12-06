@@ -177,7 +177,7 @@ namespace Benefits.Controllers
                 UsuarioLogado userLogado = await _userManager.GetUserAsync(User);
                 beneficio.Empresa = _empresaDAO.BuscarPorEmail(userLogado.Email);
                 _beneficioDAO.Cadastrar(beneficio);
-                return RedirectToAction("BeneficiosDetails", beneficio);
+                return RedirectToAction("Index");
             }
 
             return View(beneficio);
