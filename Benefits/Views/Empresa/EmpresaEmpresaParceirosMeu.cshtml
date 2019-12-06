@@ -3,38 +3,39 @@
 @{
     ViewData["Title"] = "EmpresaEmpresaParceirosMeu";
 }
-
-<h2>Empresas Parceiras</h2>
-
-<p>
-    <a asp-action="Index" class="btn btn-dark">Index</a>
-</p>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CriadoEm)
-            </th>
-            <th>
-                Empresa parceira
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CriadoEm)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmpresaDois.Razao)
-            </td>
-            <td>
-                <a asp-action="EmpresaBeneficiosParceiro" asp-route-id="@item.EmpresaDois.EmpresaId" class="btn btn-dark">Beneficios</a> |
-                <a asp-action="EmpresaRemoverParceiro" asp-controller="Empresa" asp-route-id="@item.EmpresaEmpresaId" class="btn btn-danger">Remover Parceria</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="m-2 container-fluid d-flex justify-content-center p-4 rounded bg-success">
+    <h2 class="text-white">Empresas Parceiras</h2>
+</div>
+    <div class="Início d-flex justify-content-center m-4">
+        <a asp-action="Index" class="btn btn-info">Início</a>
+    </div>
+    <table class="table table-dark table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CriadoEm)
+                </th>
+                <th>
+                    Empresa parceira
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CriadoEm)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmpresaDois.Razao)
+                    </td>
+                    <td class="d-flex justify-content-around">
+                        <a asp-action="EmpresaBeneficiosParceiro" asp-route-id="@item.EmpresaDois.EmpresaId" class="btn btn-primary">Beneficios</a>
+                        <a asp-action="EmpresaRemoverParceiro" asp-controller="Empresa" asp-route-id="@item.EmpresaEmpresaId" class="btn btn-danger">Remover Parceria</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
