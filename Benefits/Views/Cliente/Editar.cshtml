@@ -1,8 +1,7 @@
 ﻿@model Domain.Cliente
-<hr />
-<div class="row">
+<div class="row container-fluid d-flex justify-content-center bg-info p-4 text-white rounded-pill">
     <div class="col-md-4">
-        <legend>Editar Cliente</legend>
+        <legend>Editar meus dados</legend>
         <form asp-action="Editar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ClienteId" />
@@ -23,11 +22,11 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-danger" />
+                <input type="submit" value="Salvar" class="btn btn-block btn-danger" />
             </div>
 
             <div class="form-group">
-                <a class="btn btn-block btn-outline-warning" asp-controller="Cliente" asp-action="Index">Voltar</a>
+                <a class="btn btn-block btn-warning" asp-controller="Cliente" asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
