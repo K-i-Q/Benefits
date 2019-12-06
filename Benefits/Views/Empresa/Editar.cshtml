@@ -6,10 +6,10 @@
 }
 
 
-<div class="row">
+<div class="row container-fluid d-flex justify-content-center">
     <div class="col-md-4">
         <fieldset>
-            <legend>Editar Empresa</legend>
+            <legend class="p-4 rounded bg-danger text-white text-center">Editar dados da empresa</legend>
             <form asp-action="Editar">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="EmpresaId" />
@@ -35,7 +35,9 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Editar" class="btn btn-block btn-primary" />
-                    <a class="btn btn-block btn-outline-warning" asp-controller="Empresa" asp-action="Index">Voltar</a>
+                </div>
+                <div class="form-group">
+                    <a class="btn btn-block btn-warning" asp-controller="Empresa" asp-action="Index">Voltar</a>
                 </div>
 
             </form>
