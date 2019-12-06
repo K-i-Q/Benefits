@@ -3,13 +3,14 @@
 @{
     ViewData["Title"] = "EmpresaParceriasMinhas";
 }
+<div class="m-2 container-fluid d-flex justify-content-center p-4 rounded bg-success m-3">
+    <h2 class="text-white">Contratadas</h2>
+</div>
 
-<h2>EmpresaParceriasMinhas</h2>
-
-<p>
-    <a asp-action="Index" class="btn btn-info">Index</a>
-</p>
-<table class="table">
+<div class="container-fluid d-flex justify-content-center m-3">
+    <a asp-action="Index" class="btn btn-warning p-3">Início</a>
+</div>
+<table class="table table-dark table-striped">
     <thead>
         <tr>
             <th>
@@ -37,11 +38,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Empresa.Razao)
                 </td>
-                <td>
-                    <a asp-action="EmpresaRemoverParceria" asp-route-id="@item.EmpresaClienteId" class="btn btn-info">Remover</a> |
-                    <a asp-action="EmpresaClienteDetails" asp-route-id="@item.EmpresaClienteId" class="btn btn-info">Details</a> |
-                    <a asp-action="EmpresaBeneficios" asp-route-id="@item.EmpresaClienteId" class="btn btn-dark">Beneficios</a> |
-                    <a asp-action="BeneficiosTodasEmpresas" asp-route-id="@item.EmpresaClienteId" class="btn btn-dark">Todos Beneficios</a>
+                <td class="d-flex justify-content-between">
+                    <a asp-action="EmpresaRemoverParceria" asp-route-id="@item.EmpresaClienteId" class="btn btn-info">Remover</a> 
+                    <a asp-action="EmpresaClienteDetails" asp-route-id="@item.EmpresaClienteId" class="btn btn-warning">Detalhes</a> 
+                    <a asp-action="EmpresaBeneficios" asp-route-id="@item.EmpresaClienteId" class="btn btn-success">Beneficios</a> 
+                    <a asp-action="BeneficiosTodasEmpresas" asp-route-id="@item.EmpresaClienteId" class="btn btn-primary">Todos Beneficios</a>
                 </td>
             </tr>
         }
