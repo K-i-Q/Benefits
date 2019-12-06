@@ -3,33 +3,31 @@
 @{
     ViewData["Title"] = "EmpresaClienteDetails";
 }
-
-<h2>EmpresaClienteDetails</h2>
-
-<div>
-    <h4>EmpresaCliente</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nivel)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nivel)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ContratadaEm)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ContratadaEm)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Empresa.Razao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Empresa.Razao)
-        </dd>
-    </dl>
+<div class="container-fluid d-flex justify-content-center bg-info p-4 m-4 rounded-pill">
+    <h2>EmpresaClienteDetails</h2>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.EmpresaClienteId" class="btn btn-danger">Editar</a> |
-</div>
+    <div class="container-fluid d-flex justify-content-center">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nivel)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nivel)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ContratadaEm)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ContratadaEm)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Empresa.Razao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Empresa.Razao)
+            </dd>
+        </dl>
+    </div>
+    <div class="container-fluid d-flex justify-content-center">
+        <a asp-action="Edit" asp-route-id="@Model.EmpresaClienteId" class="btn btn-block btn-danger">Editar</a>
+    </div>
